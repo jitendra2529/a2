@@ -6,130 +6,70 @@
 <title>A2 Technosoft - AI Assistant</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-
   body {
     min-height: 100vh;
     background: linear-gradient(135deg, #667eea, #764ba2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; justify-content: center; align-items: center;
     padding: 20px;
   }
-
   .chat-container {
-    width: 100%;
-    max-width: 480px;
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    height: 90vh;
-    max-height: 700px;
+    width: 100%; max-width: 480px; background: #fff;
+    border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    overflow: hidden; display: flex; flex-direction: column;
+    height: 90vh; max-height: 720px;
   }
-
   .header {
     background: linear-gradient(135deg, #667eea, #764ba2);
-    color: #fff;
-    padding: 18px;
-    text-align: center;
+    color: #fff; padding: 16px; text-align: center;
   }
-  .header h1 { font-size: 20px; }
+  .header h1 { font-size: 19px; }
   .header p { font-size: 12px; opacity: 0.9; margin-top: 4px; }
-
   .chat-box {
-    flex: 1;
-    overflow-y: auto;
-    padding: 16px;
-    background: #f7f8fc;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    flex: 1; overflow-y: auto; padding: 16px;
+    background: #f7f8fc; display: flex; flex-direction: column; gap: 12px;
   }
-
   .msg {
-    max-width: 82%;
-    padding: 10px 14px;
-    border-radius: 16px;
-    font-size: 14px;
-    line-height: 1.5;
-    word-wrap: break-word;
-    white-space: pre-line;
-    animation: fadeIn 0.3s ease;
+    max-width: 85%; padding: 10px 14px; border-radius: 16px;
+    font-size: 14px; line-height: 1.5; word-wrap: break-word;
+    white-space: pre-line; animation: fadeIn 0.3s ease;
   }
-
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
   .bot {
-    background: #e9ecff;
-    color: #222;
-    align-self: flex-start;
+    background: #e9ecff; color: #222; align-self: flex-start;
     border-bottom-left-radius: 4px;
   }
-
   .user {
     background: linear-gradient(135deg, #667eea, #764ba2);
-    color: #fff;
-    align-self: flex-end;
-    border-bottom-right-radius: 4px;
+    color: #fff; align-self: flex-end; border-bottom-right-radius: 4px;
   }
-
   .input-area {
-    display: flex;
-    padding: 12px;
-    background: #fff;
-    border-top: 1px solid #eee;
-    gap: 8px;
+    display: flex; padding: 12px; background: #fff;
+    border-top: 1px solid #eee; gap: 8px;
   }
-
   .input-area input {
-    flex: 1;
-    padding: 12px 14px;
-    border: 1px solid #ddd;
-    border-radius: 30px;
-    outline: none;
-    font-size: 14px;
-    transition: 0.2s;
+    flex: 1; padding: 12px 14px; border: 1px solid #ddd;
+    border-radius: 30px; outline: none; font-size: 14px; transition: 0.2s;
   }
   .input-area input:focus { border-color: #667eea; }
-
   .btn {
-    border: none;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: #fff;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.2s;
+    border: none; background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff; width: 46px; height: 46px; border-radius: 50%;
+    cursor: pointer; font-size: 18px; display: flex;
+    align-items: center; justify-content: center; transition: 0.2s;
   }
   .btn:hover { transform: scale(1.08); }
   .btn:active { transform: scale(0.95); }
-
-  .mic-btn.recording {
-    background: #e74c3c;
-    animation: pulse 1s infinite;
-  }
-
+  .mic-btn.recording { background: #e74c3c; animation: pulse 1s infinite; }
   @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(231,76,60,0.7); }
     70% { box-shadow: 0 0 0 15px rgba(231,76,60,0); }
     100% { box-shadow: 0 0 0 0 rgba(231,76,60,0); }
   }
-
   .chat-box::-webkit-scrollbar { width: 6px; }
-  .chat-box::-webkit-scrollbar-thumb {
-    background: #c7c7ff;
-    border-radius: 10px;
-  }
+  .chat-box::-webkit-scrollbar-thumb { background: #c7c7ff; border-radius: 10px; }
 </style>
 </head>
 <body>
@@ -141,7 +81,7 @@
   </div>
 
   <div class="chat-box" id="chatBox">
-    <div class="msg bot">Namaste! 🙏 Main A2 Technosoft ki AI assistant hoon. Aap mujhse company, services, contact, location, projects, tech stack — kuch bhi puch sakte ho, main poori koshish karungi aapko sahi jawab dene ki! 😊</div>
+    <div class="msg bot">Namaste! 🙏 Main A2 Technosoft ki AI assistant hoon. Aap website, mobile app, custom software, digital marketing ya kisi bhi service ke bare me puch sakte ho. 😊</div>
   </div>
 
   <div class="input-area">
@@ -153,351 +93,1359 @@
 
 <script>
 /* =========================================================
-   A2 TECHNOSOFT - COMPLETE FAQ DATABASE
+   KNOWLEDGE BASE - A2 Technosoft (OLD + NEW triggers merged)
    ========================================================= */
-const faqData = [
+const KB = [
 
-  /* ---------- GREETING ---------- */
+  /* ================= 1. COMPANY INTRODUCTION ================= */
   {
-    question: "Namaste hello hi greeting",
-    keywords: ["hello", "hi", "hey", "namaste", "namaskar", "hlo", "hllo", "hlw", "नमस्ते", "हैलो", "हाय", "salam", "assalam", "good morning", "good evening", "good afternoon", "kaise ho", "kaisa hai"],
-    answer: "Namaste! 🙏 Main A2 Technosoft ki AI assistant hoon. Aap company ke bare me kuch bhi puch sakte ho — main poori koshish karungi sahi jawab dene ki! 😊"
-  },
-
-  /* ---------- ABOUT SELF ---------- */
-  {
-    question: "Aap kaun ho tum kaun ho aap kon ho",
-    keywords: ["aap kaun", "tum kaun", "aap kon", "tum kon", "who are you", "aap kya ho", "tum kya ho", "introduce yourself", "apne bare me", "apne baare me", "about yourself", "about you", "tumhara naam", "aapka naam", "your name", "naam kya", "आप कौन", "तुम कौन", "आपका नाम", "तुम्हारा नाम"],
-    answer: "Main A2 Technosoft ki AI assistant hoon 👩‍💼. Mera kaam hai aapko A2 Technosoft ke bare me sahi jaankari dena — services, location, contact, projects, tech stack, hiring, payment solutions — kuch bhi puch sakte ho! 😊"
-  },
-
-  /* ---------- COMPANY BASIC ---------- */
-  {
-    question: "A2 Technosoft kya hai kaun hai about",
-    keywords: ["a2 technosoft", "a2technosoft", "company kya", "kaun hai", "about", "kya hai", "बारे में", "कंपनी", "company", "introduction", "a2 techno soft", "kya karti hai"],
-    answer: "A2 Technosoft ek IT company hai jo AI-powered Web & App solutions provide karti hai. Hum fintech, web development, mobile apps, digital marketing aur bahut kuch banate hain. Humne startups se lekar Fortune 100+ companies ke saath kaam kiya hai. 💼"
-  },
-  {
-    question: "A2 Technosoft ka pata location address kaha hai",
-    keywords: ["location", "address", "office", "kha hai", "kde h", "kaha hai", "kaha ho", "location batao", "address batao", "pata batao", "office kaha", "jaipur office", "jaipur me office", "office address", "office location", "मिलने कहाँ", "meeting kaha", "कार्यालय", "पता", "लोकेशन", "ऑफिस", "jagah", "जगह", "kahan", "कहाँ"],
-    answer: "📍 A2 Technosoft ka office yaha hai:\n1/461, Kargil Hero Khuti, Near By Global Hospital Chitrakoot, Vaishali Nagar, Jaipur, Rajasthan 302021"
-  },
-  {
-    question: "A2 Technosoft ka contact number phone mobile kya hai",
-    keywords: ["contact", "number", "phone", "mobile", "call", "sampark", "फोन", "नंबर", "संपर्क", "contact number", "phone number", "mobile number", "call kare", "baat kare"],
-    answer: "📞 Aap hamari website https://a2technosoft.com par 'Get in Touch' form fill kar sakte ho, ya office visit kar sakte ho. Hamari team aapse jaldi contact karegi."
-  },
-  {
-    question: "A2 Technosoft ki website kya hai",
-    keywords: ["website", "site", "url", "link", "web address", "वेबसाइट", "link batao"],
-    answer: "🌐 Hamari official website hai: https://a2technosoft.com"
-  },
-  {
-    question: "A2 Technosoft ka email kya hai",
-    keywords: ["email", "mail", "gmail", "id", "ईमेल", "email id", "mail id"],
-    answer: "📧 Email ke liye aap website https://a2technosoft.com par contact form fill karein. Hamari team aapko email address provide kar degi."
-  },
-  {
-    question: "A2 Technosoft me kitne saal ka experience hai",
-    keywords: ["experience", "saal", "years", "kitna purana", "अनुभव", "साल", "years in business"],
-    answer: "⏳ A2 Technosoft ke paas 3+ years ka experience hai aur 120+ projects complete kar chuke hain. 95% clients humse khush hain. 😊"
-  },
-  {
-    question: "A2 Technosoft ko kitne clients hain",
-    keywords: ["client", "clients", "customer", "kitne client", "क्लाइंट", "ग्राहक"],
-    answer: "👥 A2 Technosoft ne 120+ projects complete kiye hain aur 95% happy clients hain. Humne 400+ satisfied customers ke saath kaam kiya hai."
-  },
-  {
-    question: "A2 Technosoft kaha kaha kaam karti hai",
-    keywords: ["kaha kaha", "kaun se desh", "countries", "global", "worldwide", "international", "india me"],
-    answer: "🌍 A2 Technosoft India me based hai lekin hum worldwide clients ke saath kaam karte hain — startups se lekar Fortune 100+ companies tak."
+    topic: "company_introduction",
+    triggers: [
+      "a2 technosoft kya hai","a2 technosoft ke baare mein batao","aapki company kya karti hai",
+      "company kya services deti hai","what is a2 technosoft","tell me about your company",
+      "company introduction","aap log kya kaam karte ho","aap kaun ho","aap kya karte ho",
+      "company ke baare mein batao","tumhari company kya hai","company profile batao",
+      "aap log kaun ho","aap kya kaam karte ho","aapki company ka naam kya hai",
+      "company ke bare me batao","aap log kya karte ho","kaun ho aap","aapki company kya hai",
+      "company kya hai aapki","batao apne baare mein","apni company ke baare mein batao",
+      "what do you do","who are you","what is your company","tell me about yourself",
+      "company details","apni company kya karti hai","aap kya services dete ho",
+      "tum kya karte ho","aap log kya banate ho","company kya kaam karti hai"
+    ],
+    answer: "A2 Technosoft ek IT solutions company hai jo Design & Development, Enterprise Services aur Digital Marketing services provide karti hai."
   },
 
-  /* ---------- SERVICES ---------- */
+  /* ================= 2. SERVICES SUMMARY ================= */
   {
-    question: "A2 Technosoft kya kya services deti hai",
-    keywords: ["services", "kya kya", "kaam", "सेवाएं", "सर्विस", "kya karti", "service list", "solutions", "what do you do"],
-    answer: "🛠️ A2 Technosoft ki main services:\n1. Web Development\n2. UI/UX Development\n3. Mobile App Development (Android + iOS)\n4. Digital Marketing\n5. Fintech Solutions\n6. WhatsApp Bulk SMS\n7. Bulk Text SMS\n8. SMS OTP Services\n9. Latest Technology (AI, ML, Blockchain, Cloud, IoT)"
-  },
-  {
-    question: "A2 Technosoft web development karti hai",
-    keywords: ["web development", "website banate", "website development", "वेब डेवलपमेंट", "website banwana", "site banwana"],
-    answer: "💻 Haan! A2 Technosoft robust, scalable aur responsive websites banati hai. Hum React, Node.js, Laravel jaise modern technologies use karte hain. SEO-optimized, fast-loading websites jo growth aur conversions badhayein."
-  },
-  {
-    question: "A2 Technosoft mobile app development karti hai",
-    keywords: ["mobile app", "app development", "android", "ios", "ऐप", "मोबाइल ऐप", "app banwana", "application"],
-    answer: "📱 Haan! A2 Technosoft feature-rich Android aur iOS applications banati hai. Seamless performance, robust security aur user-centric design ke saath."
-  },
-  {
-    question: "A2 Technosoft UI UX design karti hai",
-    keywords: ["ui", "ux", "design", "ui ux", "यूआई", "डिजाइन", "interface", "user experience"],
-    answer: "🎨 Haan! Hamare UI/UX experts intuitive aur visually stunning digital experiences banate hain jo customer engagement badhate hain."
-  },
-  {
-    question: "A2 Technosoft digital marketing karti hai",
-    keywords: ["marketing", "digital marketing", "seo", "ppc", "social media", "मार्केटिंग", "प्रचार", "branding", "promotion"],
-    answer: "📈 Haan! A2 Technosoft SEO, PPC, social media marketing, content strategy aur branding services deti hai — aapki online visibility badhane ke liye."
-  },
-  {
-    question: "A2 Technosoft fintech services kya hai",
-    keywords: ["fintech", "finance", "फिनटेक", "financial technology", "fintech services"],
-    answer: "💰 A2 Technosoft fintech services me seamless integration of financial technology tools aata hai — automate, secure aur scale business operations ke liye."
-  },
-  {
-    question: "A2 Technosoft WhatsApp Bulk SMS service deti hai",
-    keywords: ["whatsapp", "bulk sms", "whatsapp sms", "व्हाट्सएप", "whatsapp marketing", "whatsapp message"],
-    answer: "💬 Haan! A2 Technosoft WhatsApp Bulk SMS service deti hai — customers se directly WhatsApp par engage karo marketing aur support ke liye."
-  },
-  {
-    question: "A2 Technosoft Bulk Text SMS service deti hai",
-    keywords: ["bulk sms", "text sms", "sms", "बल्क एसएमएस", "sms gateway", "message bhejna"],
-    answer: "📨 Haan! A2 Technosoft Bulk Text SMS service deti hai — thousands of promotional ya transactional messages instantly bhejo powerful SMS gateway se."
-  },
-  {
-    question: "A2 Technosoft SMS OTP service deti hai",
-    keywords: ["otp", "sms otp", "otp service", "ओटीपी", "verification", "login otp"],
-    answer: "🔐 Haan! A2 Technosoft SMS OTP services deti hai — login, registration aur transaction security ke liye fast aur reliable One-Time Password delivery."
-  },
-  {
-    question: "A2 Technosoft latest technology services deti hai",
-    keywords: ["latest technology", "ai", "ml", "blockchain", "cloud", "iot", "एआई", "नई तकनीक", "machine learning"],
-    answer: "🚀 Haan! A2 Technosoft AI, Machine Learning, Blockchain, Cloud Computing aur IoT jaise cutting-edge technologies par kaam karti hai."
+    topic: "services_summary",
+    triggers: [
+      "aapki services kya hain","kaun kaun si services dete ho","kya kya services available hain",
+      "services batao","what services do you provide","list your services",
+      "aap log kya kya banate ho","software services","it services","aap kya kya karte ho",
+      "services kaun kaun si hai","aap kya provide karte ho","kaam kya kya karte ho",
+      "aapke paas kya services hai","konsi services dete ho","aap log kya kya services dete ho",
+      "service list batao","aap kya kya develop karte ho","aapki company kya kya karti hai",
+      "kya kya kaam karte ho","services kya kya hai","aap kya kya bana sakte ho",
+      "kya kya services provide karte ho","aapke services kya hai","what all services",
+      "service details batao","aapki services konsi hai","company kya kya services deti hai"
+    ],
+    answer: "A2 Technosoft ki services mainly Design & Development, Enterprise Services aur Digital Marketing mein hain, jisme website, mobile app, custom software, CRM, ERP, AI/ML, cloud aur digital marketing solutions shamil hain."
   },
 
-  /* ---------- TECH STACK ---------- */
+  /* ================= 3. ABOUT COMPANY ================= */
   {
-    question: "A2 Technosoft kaunsi technologies use karti hai tech stack",
-    keywords: ["technology", "tech stack", "technologies", "टेक्नोलॉजी", "tools", "languages", "kaunsi tech"],
-    answer: "⚙️ A2 Technosoft ka tech stack:\nAndroid, HTML, Angular, AWS, Big Data, Bootstrap, CakePHP, Cloud, CodeIgniter, CSS3, Flutter, Golang, Microsoft SQL, MongoDB, MySQL, iOS, JavaScript, Kotlin, Laravel, Node, NPM, PHP, PostgreSQL, Python, React, Shopify, Unity-3D, Vue, WooCommerce, WordPress."
-  },
-  { question: "A2 Technosoft React use karti hai", keywords: ["react", "reactjs", "रिएक्ट"], answer: "✅ Haan! A2 Technosoft React use karti hai modern web applications banane ke liye." },
-  { question: "A2 Technosoft Flutter use karti hai", keywords: ["flutter", "फ्लटर"], answer: "✅ Haan! A2 Technosoft Flutter use karti hai cross-platform mobile apps banane ke liye." },
-  { question: "A2 Technosoft Python use karti hai", keywords: ["python", "पाइथन"], answer: "✅ Haan! A2 Technosoft Python use karti hai backend, AI aur data solutions ke liye." },
-  { question: "A2 Technosoft WordPress Shopify use karti hai", keywords: ["wordpress", "वर्डप्रेस", "woocommerce", "shopify"], answer: "✅ Haan! A2 Technosoft WordPress, WooCommerce aur Shopify par bhi kaam karti hai." },
-
-  /* ---------- PROCESS ---------- */
-  {
-    question: "A2 Technosoft ka development process kya hai",
-    keywords: ["process", "development process", "kaise kaam", "प्रक्रिया", "steps", "how you work"],
-    answer: "🔄 A2 Technosoft ka development process:\n1. Discussion\n2. Design\n3. Development\n4. Testing\n5. Delivery"
-  },
-  {
-    question: "A2 Technosoft me developer hire kaise kare",
-    keywords: ["hire developer", "developer hire", "hire", "डेवलपर", "full time", "part time", "hourly", "developer chahiye"],
-    answer: "👨‍💻 A2 Technosoft se developer hire karne ka process:\n1. POST Requirements\n2. SCREEN Resumes\n3. INTERVIEW & Select\n4. CHOOSE Hiring Model\n5. PAY & Get Started\n\nAap full time, part time ya hourly developer hire kar sakte ho."
+    topic: "about_company",
+    triggers: [
+      "company ke baare mein batao","a2 technosoft ke baare mein","tell me about a2",
+      "about a2 technosoft","company profile","company information","a2 ke baare mein batao",
+      "company ke bare me batao","a2 technosoft kya karti hai","aapke baare mein batao",
+      "company ki details do","a2 technosoft ki info do","company ke bare me jankari do",
+      "a2 ke bare me batao kuch","aapki company ke bare me batao","company ki profile batao",
+      "a2 technosoft ke bare me batao","company information do","aap log ke bare me batao",
+      "a2 technosoft ki details","company ke bare me kuch batao","about your company",
+      "company ki jankari do","a2 ki jankari do","aapki company ki details","company ke bare me batao kuch"
+    ],
+    answer: "A2 Technosoft IT solutions aur software development par focus karti hai aur clients ke business requirements ke according customized digital solutions develop karti hai."
   },
 
-  /* ---------- INDUSTRIES ---------- */
+  /* ================= 4. FOUNDED ================= */
   {
-    question: "A2 Technosoft kaunsi industries ke liye kaam karti hai",
-    keywords: ["industries", "industry", "kaun se sector", "इंडस्ट्री", "sectors", "kis field"],
-    answer: "🏭 A2 Technosoft in industries ke liye kaam karti hai:\n1. Sports\n2. Food & Beverage\n3. Travel & Tourism\n4. E-commerce & B2B\n5. Gaming\n6. On-demand Services\n7. Real Estate\n8. Education"
-  },
-  {
-    question: "A2 Technosoft education sector me kya karti hai",
-    keywords: ["education", "school", "college", "शिक्षा", "e-learning", "online classroom", "mcq", "e-library", "learning app"],
-    answer: "🎓 A2 Technosoft education sector me:\n1. Online Classrooms\n2. ML-based MCQs Platforms\n3. E-Library App Development\n4. Digital Learning App Development\n5. Online Learning App Development"
-  },
-  {
-    question: "A2 Technosoft ecommerce ke liye kya karti hai",
-    keywords: ["ecommerce", "e-commerce", "online store", "b2b", "ई-कॉमर्स", "online shop", "dukan"],
-    answer: "🛒 A2 Technosoft secure aur scalable e-commerce solutions banati hai B2C aur B2B businesses ke liye — product catalogs, payment gateways, inventory aur user management ke saath."
-  },
-  {
-    question: "A2 Technosoft real estate ke liye kya karti hai",
-    keywords: ["real estate", "property", "realtor", "रियल एस्टेट", "property website", "ghar", "makan"],
-    answer: "🏠 A2 Technosoft real estate ke liye advanced search filters, property listings, maps, agent portals aur CRM integration wali websites banati hai."
-  },
-  {
-    question: "A2 Technosoft gaming ke liye kya karti hai",
-    keywords: ["gaming", "game", "गेमिंग", "गेम", "gaming website"],
-    answer: "🎮 A2 Technosoft gaming communities, review sites, browser-based games aur game launch platforms banati hai — performance, interactivity aur monetization ke liye optimized."
-  },
-  {
-    question: "A2 Technosoft travel tourism ke liye kya karti hai",
-    keywords: ["travel", "tourism", "tour", "ट्रैवल", "यात्रा", "travel website", "booking"],
-    answer: "✈️ A2 Technosoft travel agencies, tour operators aur destination marketers ke liye booking engines, itinerary planners, maps aur reviews wali websites banati hai."
-  },
-  {
-    question: "A2 Technosoft food restaurant ke liye kya karti hai",
-    keywords: ["food", "restaurant", "cafe", "खाना", "रेस्टोरेंट", "food delivery", "menu"],
-    answer: "🍔 A2 Technosoft restaurants, cafes, food delivery startups aur beverage brands ke liye interactive, mobile-friendly websites banati hai — online ordering, menu management aur loyalty programs ke saath."
-  },
-  {
-    question: "A2 Technosoft sports ke liye kya karti hai",
-    keywords: ["sports", "sport", "खेल", "sports website", "tournament", "league"],
-    answer: "⚽ A2 Technosoft sports platforms banati hai real-time scores, player stats, booking systems aur fan engagement features ke saath."
-  },
-  {
-    question: "A2 Technosoft on demand services ke liye kya karti hai",
-    keywords: ["on demand", "on-demand", "delivery", "ride", "home service", "ऑन डिमांड"],
-    answer: "🚕 A2 Technosoft on-demand platforms banati hai delivery, ride-sharing, home services, healthcare ke liye — real-time tracking, booking systems aur integrated payments ke saath."
+    topic: "company_founded",
+    triggers: [
+      "company kab start hui","a2 technosoft kab bani","founded kab hui",
+      "when was a2 technosoft founded","company start year","establishment year",
+      "company kab shuru hui","a2 technosoft kab shuru hui","company kab se hai",
+      "company kab bani thi","a2 kab bani","company kab establish hui",
+      "a2 technosoft kab start hui thi","company kitne saal purani hai","a2 technosoft kab se hai",
+      "company kab start hui thi","kab se hai aapki company","a2 technosoft ki sthapna kab hui",
+      "company kab founded hui","a2 technosoft kab establish hui","company ka start year kya hai",
+      "a2 technosoft kab shuru hui thi","when was company started","company kab bani hai",
+      "a2 technosoft ki founding year","company start kab hui"
+    ],
+    answer: "A2 Technosoft ki foundation 2019 mein hui thi."
   },
 
-  /* ---------- SERVER / HOSTING ---------- */
+  /* ================= 5. EXPERIENCE ================= */
   {
-    question: "A2 Technosoft server ya hosting support deti hai",
-    keywords: ["server", "hosting", "सर्वर", "होस्टिंग", "aws server", "cloud server", "dedicated server"],
-    answer: "🖥️ Haan! A2 Technosoft server/hosting support deti hai:\n1. AWS Server\n2. Sharing Server\n3. Dedicated Server\n4. Cloud Server\n5. Hybrid Server"
+    topic: "experience",
+    triggers: [
+      "kitne saal ka experience hai","company experience","how many years experience",
+      "experience kitna hai","company ko kitna time hua","projects kitne kiye hain",
+      "aapka experience kya hai","company ka experience batao","kitne saal se kaam kar rahe ho",
+      "aap kitne saal se ho","experience kitna saal ka hai","kitne projects kiye ho",
+      "aapka kitna experience hai","company kitne saal purani hai","kitne saal ka experience hai aapka",
+      "aap log kitne saal se kaam kar rahe ho","company ka kitna experience hai","kitne project complete kiye hai",
+      "aapka experience kitna saal ka hai","company ko kitne saal ho gaye","kitne saal se ho aap",
+      "how many projects completed","aapka kitna saal ka experience hai","kitne projects kar chuke ho",
+      "company ka experience kitna hai","aap kitne saal se kaam kar rahe ho"
+    ],
+    answer: "A2 Technosoft ke according company ke paas IT solutions deliver karne ka experience hai aur 100+ projects complete kiye gaye hain."
   },
 
-  /* ---------- PAYMENT ---------- */
+  /* ================= 6. TEAM ================= */
   {
-    question: "A2 Technosoft payment solutions deti hai",
-    keywords: ["payment", "payment gateway", "stripe", "paypal", "razorpay", "पेमेंट", "upi", "transaction"],
-    answer: "💳 Haan! A2 Technosoft seamless payment integration deti hai:\n1. Stripe, PayPal, Razorpay integration\n2. Secure PCI-compliant transaction processing\n3. Multiple payment methods (Credit cards, Digital wallets, UPI, Bank transfers)\n4. 24/7 Payment Support"
-  },
-  {
-    question: "A2 Technosoft payment integration kaise karti hai",
-    keywords: ["payment integration", "gateway integration", "payment gateway integrate"],
-    answer: "🔗 A2 Technosoft popular payment gateways jaise Stripe, PayPal aur Razorpay ko aapki website ya app me minimal setup time ke saath integrate karti hai."
-  },
-
-  /* ---------- CLIENTS / REVIEWS ---------- */
-  {
-    question: "A2 Technosoft ke clients kya kehte hain reviews",
-    keywords: ["reviews", "feedback", "testimonial", "clients kya kehte", "रिव्यू", "अनुभव", "client review"],
-    answer: "⭐ A2 Technosoft ke clients:\n\n• Rajesh Kumar (Retail Business Owner, Mumbai): 'A2 TechnoSoft helped us launch our online store smoothly and efficiently. Highly recommended!'\n\n• Neha Sharma (Startup Founder, Bengaluru): 'Great experience working with A2 TechnoSoft. Delivered a mobile app that exceeded our expectations.'\n\n• Priya Singh (Operations Manager, Delhi): 'Very helpful and provided excellent support during our custom CRM solution development.'"
-  },
-  {
-    question: "A2 Technosoft ke kitne projects complete hue hain",
-    keywords: ["projects", "kitne project", "प्रोजेक्ट", "completed projects"],
-    answer: "📊 A2 Technosoft ne 120+ projects complete kiye hain aur 3+ years se business me hain."
-  },
-  {
-    question: "A2 Technosoft ke kitne happy clients hain",
-    keywords: ["happy clients", "khush clients", "satisfied", "95%", "client satisfaction"],
-    answer: "😊 A2 Technosoft ke 95% happy clients hain — 400+ satisfied customers ke saath."
+    topic: "team",
+    triggers: [
+      "team kitni hai","developers hain","designers hain","project manager hai",
+      "in house team","who works at your company","development team","aapki team kitni badi hai",
+      "kitne developers hai","team mein kaun kaun hai","aapke paas kitne log hai",
+      "team ki details batao","developers kitne hai","aapki team mein kya kya log hai",
+      "kitne employees hai","team size kya hai","aapke paas kaun kaun kaam karta hai",
+      "developers hain aapke paas","team ke bare me batao","aapki team kaun hai",
+      "kitne log kaam karte hai","aapki team mein kaun kaun hai","team members kaun hai",
+      "aapke developers kaun hai","team kitne log ki hai","aapki team mein kitne log hai",
+      "who all are in your team"
+    ],
+    answer: "A2 Technosoft ke paas in-house developers, designers aur project managers ki dedicated team hai jo projects ko end-to-end handle karti hai."
   },
 
-  /* ---------- BLOG ---------- */
+  /* ================= 7. OFFICE LOCATION ================= */
   {
-    question: "A2 Technosoft ka blog kya hai",
-    keywords: ["blog", "blogs", "articles", "ब्लॉग", "latest blog", "tech blog"],
-    answer: "📝 A2 Technosoft ke latest tech blogs:\n1. Android App Development\n2. Web Development - Information from Trusted Internet Sources\n3. Mobile App Development & Web App Development\n\nAap website https://a2technosoft.com par ye blogs padh sakte ho."
+    topic: "office_location",
+    triggers: [
+      "office kahan hai","address kya hai","jaipur office","office location",
+      "where is your office","location batao","vaishali nagar office","aapka office kaha hai",
+      "office ka pata batao","aap kaha ho","office kaha located hai","aapka address kya hai",
+      "company kaha hai","aapki company kaha hai","office kaha par hai","address batao apna",
+      "aapka office kaha par hai","office ki location batao","aap kaha par ho",
+      "company ka address batao","aapka office kaha hai batao","office address kya hai",
+      "aap kaha kaam karte ho","office kaha hai aapka","company kaha located hai",
+      "aapka pata kya hai","where are you located"
+    ],
+    answer: "A2 Technosoft ka main office Vaishali Nagar, Jaipur mein located hai aur company globally clients ko serve karti hai."
   },
 
-  /* ---------- HIRING / CONTACT FORM ---------- */
+  /* ================= 8. GLOBAL CLIENTS ================= */
   {
-    question: "A2 Technosoft se contact kaise kare",
-    keywords: ["contact kaise", "sampark kaise", "baat kaise", "get in touch", "form fill", "consultation", "milna hai"],
-    answer: "📞 A2 Technosoft se contact karne ke liye:\n1. Website https://a2technosoft.com par 'Get in Touch' form fill karein\n2. Office visit karein: 1/461, Kargil Hero Khuti, Vaishali Nagar, Jaipur\n3. Hamari team aapse jaldi contact karegi.\n\n🔒 100% Confidential - Hum NDA sign karte hain."
-  },
-  {
-    question: "A2 Technosoft NDA sign karti hai confidential",
-    keywords: ["nda", "confidential", "privacy", "गोपनीयता", "nda sign", "secret"],
-    answer: "🔒 Haan! A2 Technosoft 100% confidentiality maintain karti hai aur NDA (Non-Disclosure Agreement) sign karti hai."
+    topic: "global_clients",
+    triggers: [
+      "kya india ke bahar kaam karte ho","international clients","foreign clients",
+      "global clients","worldwide services","do you work globally","outside india projects",
+      "aap bahar ke clients ke saath kaam karte ho","international projects karte ho",
+      "foreign clients hai aapke","aap worldwide kaam karte ho","bahar desh me bhi kaam karte ho",
+      "global clients hai","aap india ke bahar bhi kaam karte ho","international clients ke saath kaam karte ho",
+      "aap dusre desh me kaam karte ho","foreign projects karte ho","aap global kaam karte ho",
+      "bahar ke clients hai","aap international kaam karte ho","worldwide clients hai aapke",
+      "aap india ke bahar clients ke saath kaam karte ho","do you have international clients",
+      "aap videsh me kaam karte ho","global projects karte ho","aap bahar bhi kaam karte ho",
+      "international client hai aapke"
+    ],
+    answer: "Ji haan, A2 Technosoft globally clients ko IT aur digital solutions provide karti hai."
   },
 
-  /* ---------- LEGAL ---------- */
+  /* ================= 9. WEBSITE ================= */
   {
-    question: "A2 Technosoft legal disclaimer kya hai",
-    keywords: ["legal", "disclaimer", "law", "कानून", "legal disclaimer", "govt of india"],
-    answer: "⚖️ A2 Technosoft Govt. of India ke laws (including Promotion and Regulation of Online Gaming Act, 2025) ko abide karti hai. Full Legal Disclaimer website par available hai."
+    topic: "website",
+    triggers: [
+      "website banate ho","website develop karte ho","website development","web development",
+      "website banwani hai","site banani hai","business website","website developer",
+      "web design","website service","mujhe website chahiye","website ka kaam karte ho",
+      "website banwana hai","website banane ka kitna lagega","website bana do",
+      "website banani hai mujhe","website banwani h","website chahiye mujhe",
+      "website banate ho aap","website banwana h","site banwani hai mujhe",
+      "website ka kaam karte ho aap","website banane wale ho","website bana sakte ho",
+      "mujhe ek website banwani hai","website develop karte ho aap","website banwani hai aap se",
+      "website ka kaam karte ho kya","website banwana hai mujhe"
+    ],
+    answer: "Ji haan, A2 Technosoft business websites, e-commerce websites aur portfolio websites develop karti hai."
   },
 
-  /* ---------- WHY CHOOSE US ---------- */
+  /* ================= 10. WEBSITE TYPES ================= */
   {
-    question: "A2 Technosoft kyu choose kare",
-    keywords: ["why choose", "kyu choose", "best kyu", "क्यों चुने", "why a2", "benefits", "fayde"],
-    answer: "✅ A2 Technosoft kyu choose karein:\n1. 3+ years experience\n2. 120+ projects completed\n3. 95% happy clients\n4. Startup se Fortune 100+ tak clients\n5. Modern technologies (React, Node.js, Laravel, AI, ML)\n6. 100% Confidential - NDA sign karte hain\n7. End-to-end digital transformation services"
+    topic: "website_types",
+    triggers: [
+      "kis type ki website banate ho","business website","ecommerce website",
+      "portfolio website","website types","what type of websites","online store website",
+      "company website","kaunsi website banate ho","kya kya website banate ho",
+      "website ke types batao","aap kis type ki website banate ho","kaun kaun si website banate ho",
+      "website konsi banate ho","aap kya kya website banate ho","website ke kitne types hai",
+      "aap kaunsi website develop karte ho","kya kya type ki website banate ho",
+      "website types kya hai","aap kya kya website bana sakte ho","kaunsi kaunsi website banate ho",
+      "website ke types kya hai","aap kis type ki website banate ho batao",
+      "what types of websites you make","aap kya kya website banate ho batao",
+      "website kitne type ki hoti hai","aap kaunsi kaunsi website banate ho","kya kya website develop karte ho"
+    ],
+    answer: "Hum business websites, e-commerce stores aur portfolio websites develop karte hain."
   },
+
+  /* ================= 11. WEBSITE PRICING ================= */
   {
-    question: "A2 Technosoft kis type ki company hai",
-    keywords: ["type of company", "kaisi company", "it company", "कैसी कंपनी", "software company", "it services"],
-    answer: "🏢 A2 Technosoft ek IT company hai jo AI-Powered Web & App Solutions provide karti hai. Hum fintech, web development, mobile apps, digital marketing, e-commerce aur bahut kuch banate hain."
+    topic: "website_pricing",
+    triggers: [
+      "website kitne ki hai","website price","website cost","website ka charge",
+      "website budget","website banwane ka kharcha","web development price",
+      "site kitne mein banegi","website starting price","website ka kitna lagega",
+      "website kitne me banegi","website ka price kya hai","website banane ka kitna paisa lagega",
+      "website ka kitna charge hai","website kitne ka banega","website banwane me kitna lagega",
+      "website ka kitna kharcha hai","website kitne rupees ki banegi","website ka rate kya hai",
+      "website banwane ka kitna lagega","website ka kitna paisa lagega","website kitne ki banegi",
+      "website ka charge kya hai","website banane ka rate batao","website ka budget kya hai",
+      "website kitne me ban jayegi","website ka kitna kharcha aayega","website banane me kitna paisa lagega",
+      "how much for website"
+    ],
+    answer: "Website development packages ₹15,000 se start hote hain. Final cost required features aur project scope par depend karti hai."
   },
+
+  /* ================= 12. WEBSITE TIMELINE ================= */
   {
-    question: "A2 Technosoft ka mission kya hai",
-    keywords: ["mission", "vision", "goal", "मिशन", "लक्ष्य", "aim", "uddeshya"],
-    answer: "🎯 A2 Technosoft ka mission hai businesses ko AI-powered web aur app solutions ke through empower karna, unki growth accelerate karna aur digital transformation me madad karna."
+    topic: "website_timeline",
+    triggers: [
+      "website kitne din mein banegi","website timeline","website completion time",
+      "website kab tak ready hogi","how long website takes","website development time",
+      "website kitne time me banegi","website banne me kitna time lagega","website kab ready hogi",
+      "website kitne dino me banegi","website banane me kitna samay lagega","website ka time kya hai",
+      "website kitne week me banegi","website kitne mahine me banegi","website kab tak ban jayegi",
+      "website banne me kitna time lagta hai","website ka kitna time lagega","website kitne time me ready hogi",
+      "website delivery kab hogi","website kitne din me ready hogi","website banane me kitna din lagega",
+      "how long to make a website","website ka timeline kya hai","website kab tak ready ho jayegi",
+      "website kitne samay me banegi","website kitne din me ban jayegi"
+    ],
+    answer: "Standard website generally 2 se 3 weeks mein complete ho sakti hai, requirements ke according timeline change ho sakti hai."
+  },
+
+  /* ================= 13. RESPONSIVE WEBSITE ================= */
+  {
+    topic: "responsive_website",
+    triggers: [
+      "mobile responsive website","mobile par website chalegi","responsive website",
+      "phone mein website","tablet responsive","mobile friendly website",
+      "website mobile me chalegi","website phone me chalegi kya","mobile me website dikhegi",
+      "website mobile friendly hai","website phone pe chalegi","mobile par website kaise chalegi",
+      "website mobile responsive hai kya","website mobile me sahi chalegi","phone me website chalegi kya",
+      "website mobile par kaam karegi","website tablet me chalegi","website sab device me chalegi",
+      "website mobile par sahi dikhegi","website responsive banate ho","mobile me website theek chalegi",
+      "website phone me sahi chalegi","website mobile friendly banate ho","website har device me chalegi",
+      "website mobile par kaam karegi kya","mobile responsive website banate ho"
+    ],
+    answer: "Ji haan, websites mobile-responsive banayi jaati hain taaki different screen sizes par properly work karein."
+  },
+
+  /* ================= 14. SEO FRIENDLY WEBSITE ================= */
+  {
+    topic: "seo_website",
+    triggers: [
+      "website seo friendly hai","seo website","search engine friendly",
+      "google ranking ke liye website","seo friendly development","website google me upar aayegi",
+      "website seo friendly banate ho","website google me rank karegi","website search engine me aayegi",
+      "website google me dikhegi","website seo friendly hai kya","website google ranking ke liye banate ho",
+      "website search me aayegi kya","website google me kaise aayegi","website seo karte ho",
+      "website search engine friendly hai","website google me upar laani hai","website google me rank karani hai",
+      "website seo friendly banate ho kya","website google me aayegi","website search engine me upar aayegi",
+      "website google ranking karegi","website seo friendly hai","website google me kaise laaye",
+      "website search me kaise aayegi"
+    ],
+    answer: "A2 Technosoft websites ko SEO-friendly aur mobile-responsive requirements ke according develop karti hai."
+  },
+
+  /* ================= 15. MOBILE APP ================= */
+  {
+    topic: "mobile_app",
+    triggers: [
+      "mobile app banate ho","app development","android app","iphone app","ios app",
+      "mobile application","application banwani hai","app developer","android ios app",
+      "app banwani hai","mujhe app chahiye","app banwana hai","mobile app banwani hai",
+      "app ka kaam karte ho","app bana do","app banane ka kitna lagega","mujhe ek app banwani hai",
+      "app banate ho aap","mobile app chahiye","app develop karte ho","app ka kaam karte ho aap",
+      "app banane wale ho","app bana sakte ho","mujhe mobile app banwani hai","app banwani hai mujhe",
+      "app banwana h","mobile application banwani hai","app ka kaam karte ho kya","app banwani hai aap se"
+    ],
+    answer: "Ji haan, A2 Technosoft Android aur iOS dono platforms ke liye mobile applications develop karti hai."
+  },
+
+  /* ================= 16. ANDROID APP ================= */
+  {
+    topic: "android_app",
+    triggers: [
+      "android app","android application","android ke liye app","play store app",
+      "android development","android developer","android app banate ho","android ke liye app banate ho",
+      "android app banwani hai","android application chahiye","android app develop karte ho",
+      "android app ka kaam karte ho","android app bana do","android ke liye app chahiye",
+      "android app banate ho aap","android app banwani hai mujhe","android app ka kaam karte ho kya",
+      "android app bana sakte ho","android app banane wale ho","android ke liye application banate ho",
+      "android app chahiye mujhe","android app banwana hai","android app develop karte ho aap",
+      "android app banwani h","android app banane wale","android app ka kaam karte ho aap"
+    ],
+    answer: "Ji haan, hum Android applications develop karte hain. App ki final cost features aur requirements par depend karti hai."
+  },
+
+  /* ================= 17. iOS APP ================= */
+  {
+    topic: "ios_app",
+    triggers: [
+      "iphone app","ios application","apple app","iphone ke liye app","ios development",
+      "app store app","iphone app banate ho","ios app banate ho","apple app banate ho",
+      "iphone ke liye app banate ho","ios application chahiye","iphone app banwani hai",
+      "ios app develop karte ho","apple ke liye app banate ho","iphone app ka kaam karte ho",
+      "ios app bana do","iphone app chahiye","ios app banwani hai","apple app banate ho aap",
+      "iphone app banate ho aap","ios app ka kaam karte ho kya","iphone ke liye app chahiye",
+      "ios app banane wale ho","iphone app develop karte ho","apple app development karte ho",
+      "ios app banwana hai"
+    ],
+    answer: "Ji haan, A2 Technosoft iOS applications bhi develop karti hai."
+  },
+
+  /* ================= 18. MOBILE APP PRICING ================= */
+  {
+    topic: "mobile_app_pricing",
+    triggers: [
+      "app kitne ki hai","mobile app price","app development cost","android app price",
+      "ios app price","application cost","app banwane ka charge","mobile application budget",
+      "app ka kitna lagega","app kitne me banegi","app ka price kya hai","app banane ka kitna paisa lagega",
+      "app ka kitna charge hai","app kitne ka banega","app banwane me kitna lagega",
+      "app ka kitna kharcha hai","app kitne rupees ki banegi","app ka rate kya hai",
+      "app banwane ka kitna lagega","app ka kitna paisa lagega","app kitne ki banegi",
+      "app ka charge kya hai","app banane ka rate batao","app ka budget kya hai",
+      "app kitne me ban jayegi","app ka kitna kharcha aayega","app banane me kitna paisa lagega",
+      "how much for app"
+    ],
+    answer: "Mobile app development ₹50,000 se start hoti hai. Final cost app ke features aur requirements ke according decide hoti hai."
+  },
+
+  /* ================= 19. MOBILE APP TIMELINE ================= */
+  {
+    topic: "mobile_app_timeline",
+    triggers: [
+      "app kitne din mein banegi","app development time","mobile app timeline",
+      "android app timeline","ios app timeline","application completion time",
+      "app kitne time me banegi","app banne me kitna time lagega","app kab ready hogi",
+      "app kitne dino me banegi","app banane me kitna samay lagega","app ka time kya hai",
+      "app kitne week me banegi","app kitne mahine me banegi","app kab tak ban jayegi",
+      "app banne me kitna time lagta hai","app ka kitna time lagega","app kitne time me ready hogi",
+      "app delivery kab hogi","app kitne din me ready hogi","app banane me kitna din lagega",
+      "how long to make an app","app ka timeline kya hai","app kab tak ready ho jayegi",
+      "app kitne samay me banegi","app kitne din me ban jayegi"
+    ],
+    answer: "Mobile app development generally 4 se 8 weeks le sakti hai, depending on features aur project scope."
+  },
+
+  /* ================= 20. CUSTOM SOFTWARE ================= */
+  {
+    topic: "custom_software",
+    triggers: [
+      "custom software banate ho","software develop karte ho","customized software",
+      "business software","software banwana hai","custom application","software development",
+      "tailor made software","mujhe software chahiye","software banwani hai","software banwana hai",
+      "custom software chahiye","software ka kaam karte ho","software bana do",
+      "business ke liye software chahiye","software banane ka kitna lagega","mujhe custom software banwana hai",
+      "software banate ho aap","software develop karte ho","software ka kaam karte ho aap",
+      "software banane wale ho","software bana sakte ho","mujhe apne business ke liye software chahiye",
+      "software banwani hai mujhe","software banwana h","custom software banwani hai",
+      "software ka kaam karte ho kya","software banwani hai aap se"
+    ],
+    answer: "Ji haan, A2 Technosoft business requirements ke according custom software develop karti hai."
+  },
+
+  /* ================= 21. CRM ================= */
+  {
+    topic: "crm",
+    triggers: [
+      "crm banate ho","crm development","customer management software","crm software",
+      "custom crm","crm integration","sales crm","mujhe crm chahiye","crm banwani hai",
+      "crm banwana hai","customer manage karne ka software chahiye","crm ka kaam karte ho",
+      "crm bana do","crm software chahiye","crm banane ka kitna lagega","mujhe custom crm banwana hai",
+      "crm banate ho aap","crm develop karte ho","crm ka kaam karte ho aap",
+      "crm banane wale ho","crm bana sakte ho","mujhe crm software chahiye",
+      "crm banwani hai mujhe","crm banwana h","custom crm banwani hai",
+      "crm ka kaam karte ho kya","crm banwani hai aap se"
+    ],
+    answer: "Ji haan, hum custom CRM development aur integration services provide karte hain."
+  },
+
+  /* ================= 22. ERP ================= */
+  {
+    topic: "erp",
+    triggers: [
+      "erp software","erp development","erp banate ho","business erp","custom erp",
+      "enterprise software","mujhe erp chahiye","erp banwani hai","erp banwana hai",
+      "business ke liye erp chahiye","erp ka kaam karte ho","erp bana do","erp software chahiye",
+      "erp banane ka kitna lagega","mujhe custom erp banwana hai","erp banate ho aap",
+      "erp develop karte ho","erp ka kaam karte ho aap","erp banane wale ho",
+      "erp bana sakte ho","mujhe erp software chahiye","erp banwani hai mujhe",
+      "erp banwana h","custom erp banwani hai","erp ka kaam karte ho kya","erp banwani hai aap se"
+    ],
+    answer: "Ji haan, A2 Technosoft business requirements ke according ERP solutions develop aur integrate kar sakti hai."
+  },
+
+  /* ================= 23. BILLING SOFTWARE ================= */
+  {
+    topic: "billing_software",
+    triggers: [
+      "billing software","bill banane ka software","invoice software","billing system",
+      "billing application","custom billing software","mujhe billing software chahiye",
+      "billing software banwani hai","bill banane ka software chahiye","billing system chahiye",
+      "billing software ka kaam karte ho","billing software bana do","invoice software chahiye",
+      "billing software banane ka kitna lagega","mujhe billing software banwana hai",
+      "billing software banate ho aap","billing software develop karte ho",
+      "billing software ka kaam karte ho aap","billing software banane wale ho",
+      "billing software bana sakte ho","business ke liye billing system banana hai",
+      "billing software banwani hai mujhe","billing software banwana h",
+      "custom billing software banwani hai","billing software ka kaam karte ho kya",
+      "billing software banwani hai aap se"
+    ],
+    answer: "Ji haan, hum business requirements ke according custom billing aur invoicing software develop kar sakte hain."
+  },
+
+  /* ================= 24. INVENTORY SOFTWARE ================= */
+  {
+    topic: "inventory_software",
+    triggers: [
+      "inventory software","stock management","inventory management","stock software",
+      "inventory system","stock tracking software","mujhe inventory software chahiye",
+      "inventory software banwani hai","stock ka hisaab rakhne ka system chahiye",
+      "stock management software chahiye","inventory software ka kaam karte ho",
+      "inventory software bana do","stock software chahiye","inventory software banane ka kitna lagega",
+      "mujhe inventory software banwana hai","inventory software banate ho aap",
+      "inventory software develop karte ho","inventory software ka kaam karte ho aap",
+      "inventory software banane wale ho","inventory software bana sakte ho",
+      "stock ka hisaab rakhne ka software chahiye","inventory software banwani hai mujhe",
+      "inventory software banwana h","custom inventory software banwani hai",
+      "inventory software ka kaam karte ho kya","inventory software banwani hai aap se"
+    ],
+    answer: "Ji haan, A2 Technosoft inventory aur stock management solutions develop karti hai."
+  },
+
+  /* ================= 25. ECOMMERCE ================= */
+  {
+    topic: "ecommerce",
+    triggers: [
+      "ecommerce website","online store","online shopping website","ecommerce development",
+      "online shop","shopping website","ecommerce app","store development",
+      "mujhe ecommerce website chahiye","online store banwani hai","online shopping website chahiye",
+      "ecommerce website banwani hai","online shop banwana hai","ecommerce ka kaam karte ho",
+      "ecommerce website bana do","shopping website chahiye","ecommerce website banane ka kitna lagega",
+      "mujhe online store banwana hai","ecommerce website banate ho aap","ecommerce develop karte ho",
+      "ecommerce ka kaam karte ho aap","ecommerce website banane wale ho",
+      "ecommerce website bana sakte ho","mujhe online shopping website chahiye",
+      "ecommerce website banwani hai mujhe","ecommerce website banwana h","online store banwani hai",
+      "ecommerce website ka kaam karte ho kya"
+    ],
+    answer: "Ji haan, A2 Technosoft e-commerce websites aur related digital solutions develop karti hai."
+  },
+
+  /* ================= 26. GAME DEVELOPMENT ================= */
+  {
+    topic: "game_development",
+    triggers: [
+      "game banate ho","game development","mobile game","gaming application",
+      "game developer","game software","game banwani hai","mujhe game chahiye",
+      "game banwana hai","game ka kaam karte ho","game bana do","game banane ka kitna lagega",
+      "mujhe ek game banwana hai","game banate ho aap","game develop karte ho",
+      "game ka kaam karte ho aap","game banane wale ho","game bana sakte ho",
+      "mujhe mobile game banwana hai","game banwani hai mujhe","game banwana h",
+      "game development karte ho","game ka kaam karte ho kya","game banwani hai aap se",
+      "gaming app banwani hai","game developer chahiye"
+    ],
+    answer: "Ji haan, A2 Technosoft game development services bhi provide karti hai."
+  },
+
+  /* ================= 27. API DEVELOPMENT ================= */
+  {
+    topic: "api_development",
+    triggers: [
+      "api banate ho","api development","custom api","backend api","api integration",
+      "rest api","api service","mujhe api chahiye","api banwani hai","api banwana hai",
+      "api ka kaam karte ho","api bana do","api banane ka kitna lagega","mujhe custom api banwana hai",
+      "api banate ho aap","api develop karte ho","api ka kaam karte ho aap",
+      "api banane wale ho","api bana sakte ho","mujhe api development karwana hai",
+      "api banwani hai mujhe","api banwana h","custom api banwani hai",
+      "api ka kaam karte ho kya","api banwani hai aap se","backend api chahiye","rest api banate ho"
+    ],
+    answer: "Ji haan, hum custom API development aur API integration services provide karte hain."
+  },
+
+  /* ================= 28. SOFTWARE INTEGRATION ================= */
+  {
+    topic: "software_integration",
+    triggers: [
+      "software integration","api integration","system integration","third party integration",
+      "software connect karna","integration services","mujhe software integration chahiye",
+      "software integrate karwana hai","software connect karna hai","system integration chahiye",
+      "third party integration chahiye","software integration ka kaam karte ho",
+      "integration services chahiye","software integration banane ka kitna lagega",
+      "mujhe software integration karwana hai","software integration karte ho aap",
+      "integration develop karte ho","software integration ka kaam karte ho aap",
+      "integration karne wale ho","software integration kar sakte ho","mujhe api integration chahiye",
+      "software integration karwani hai","software integration karwana h",
+      "custom integration chahiye","software integration ka kaam karte ho kya",
+      "software integration karwani hai aap se"
+    ],
+    answer: "Ji haan, A2 Technosoft custom software integration aur third-party system/API integration services provide karti hai."
+  },
+
+  /* ================= 29. ENTERPRISE SERVICES ================= */
+  {
+    topic: "enterprise_services",
+    triggers: [
+      "enterprise services","enterprise solution","business it solution","enterprise software",
+      "large business solutions","corporate it services","enterprise ke liye services",
+      "bade business ke liye solution","corporate services","enterprise solution chahiye",
+      "business it solution chahiye","enterprise services kya hai","large business ke liye software",
+      "corporate it services chahiye","enterprise ke liye kya karte ho","bade business ke liye kya karte ho",
+      "enterprise solution chahiye mujhe","corporate ke liye services","enterprise software chahiye",
+      "business ke liye it solution","enterprise services batao","bade business ke liye solution chahiye",
+      "corporate services chahiye","enterprise solution banate ho","business it services kya hai",
+      "enterprise ke liye services batao"
+    ],
+    answer: "A2 Technosoft ki Enterprise Services mein CRM Development & Integration, Cloud Services, IoT Solutions, Data Engineering, AI/ML, MS Dynamics aur Fintech Solutions shamil hain."
+  },
+
+  /* ================= 30. CLOUD SERVICES ================= */
+  {
+    topic: "cloud_services",
+    triggers: [
+      "cloud services","cloud solution","cloud development","cloud integration",
+      "cloud software","cloud computing","mujhe cloud services chahiye","cloud solution chahiye",
+      "cloud services kya hai","cloud development karte ho","cloud integration chahiye",
+      "cloud software chahiye","cloud computing services chahiye","cloud services ka kaam karte ho",
+      "cloud solution banate ho","cloud services batao","cloud ke liye kya karte ho",
+      "cloud services provide karte ho","cloud solution chahiye mujhe","cloud development services",
+      "cloud integration karte ho","cloud software banate ho","cloud computing karte ho",
+      "cloud services ke bare me batao","cloud solution kya hai","cloud services chahiye mujhe"
+    ],
+    answer: "A2 Technosoft cloud services aur cloud-based solutions provide karti hai according to project requirements."
+  },
+
+  /* ================= 31. IOT ================= */
+  {
+    topic: "iot",
+    triggers: [
+      "iot services","internet of things","iot solution","iot development",
+      "smart device software","connected devices","mujhe iot chahiye","iot services chahiye",
+      "iot solution chahiye","iot development karte ho","iot kya hai","iot services batao",
+      "iot ke liye kya karte ho","iot services provide karte ho","iot solution chahiye mujhe",
+      "iot development services","iot karte ho aap","iot services ka kaam karte ho",
+      "iot solution banate ho","internet of things karte ho","iot services ke bare me batao",
+      "iot solution kya hai","iot services chahiye mujhe","iot development karte ho aap",
+      "iot ka kaam karte ho","iot solution banate ho aap"
+    ],
+    answer: "Ji haan, A2 Technosoft IoT solutions provide karti hai."
+  },
+
+  /* ================= 32. DATA ENGINEERING ================= */
+  {
+    topic: "data_engineering",
+    triggers: [
+      "data engineering","data solution","data management","data pipeline","big data","data services",
+      "mujhe data engineering chahiye","data solution chahiye","data management chahiye",
+      "data engineering kya hai","data services chahiye","data pipeline chahiye","big data chahiye",
+      "data engineering services batao","data ke liye kya karte ho","data engineering provide karte ho",
+      "data solution chahiye mujhe","data management services","data engineering karte ho aap",
+      "data services ka kaam karte ho","data solution banate ho","big data services chahiye",
+      "data engineering services chahiye mujhe","data pipeline banate ho","data management karte ho",
+      "data engineering ke bare me batao"
+    ],
+    answer: "A2 Technosoft Data Engineering solutions bhi provide karti hai."
+  },
+
+  /* ================= 33. AI/ML ================= */
+  {
+    topic: "ai_ml",
+    triggers: [
+      "ai development","machine learning","ai ml","artificial intelligence","ai solution",
+      "ml solution","ai software","mujhe ai chahiye","ai development chahiye","ai solution chahiye",
+      "machine learning chahiye","ai ml karte ho","ai kya hai","ai services batao",
+      "ai ke liye kya karte ho","ai services provide karte ho","ai solution chahiye mujhe",
+      "ai development services","ai karte ho aap","ai ka kaam karte ho","ai solution banate ho",
+      "artificial intelligence karte ho","ai ml services chahiye","ai solution kya hai",
+      "ai services chahiye mujhe","ai development karte ho aap","ai ka kaam karte ho"
+    ],
+    answer: "Ji haan, A2 Technosoft AI/ML solutions develop karti hai according to business and project requirements."
+  },
+
+  /* ================= 34. MS DYNAMICS ================= */
+  {
+    topic: "ms_dynamics",
+    triggers: [
+      "ms dynamics","microsoft dynamics","dynamics services","dynamics development",
+      "dynamics integration","mujhe ms dynamics chahiye","ms dynamics services chahiye",
+      "microsoft dynamics chahiye","dynamics development karte ho","dynamics kya hai",
+      "ms dynamics services batao","dynamics ke liye kya karte ho","dynamics services provide karte ho",
+      "ms dynamics solution chahiye mujhe","dynamics development services","dynamics karte ho aap",
+      "dynamics ka kaam karte ho","dynamics solution banate ho","ms dynamics karte ho",
+      "dynamics services chahiye","microsoft dynamics services chahiye mujhe","dynamics integration karte ho",
+      "ms dynamics ke bare me batao","dynamics solution kya hai","ms dynamics services chahiye mujhe"
+    ],
+    answer: "A2 Technosoft MS Dynamics related services bhi provide karti hai."
+  },
+
+  /* ================= 35. FINTECH ================= */
+  {
+    topic: "fintech",
+    triggers: [
+      "fintech development","finance software","fintech solution","financial application",
+      "payment software","fintech services","mujhe fintech chahiye","fintech development chahiye",
+      "fintech solution chahiye","finance software chahiye","fintech kya hai","fintech services batao",
+      "fintech ke liye kya karte ho","fintech services provide karte ho","fintech solution chahiye mujhe",
+      "fintech development services","fintech karte ho aap","fintech ka kaam karte ho",
+      "fintech solution banate ho","financial application chahiye","fintech services chahiye",
+      "payment software chahiye mujhe","fintech ke bare me batao","fintech solution kya hai",
+      "fintech services chahiye mujhe","fintech development karte ho"
+    ],
+    answer: "Ji haan, A2 Technosoft Fintech solutions bhi provide karti hai."
+  },
+
+  /* ================= 36. DIGITAL MARKETING ================= */
+  {
+    topic: "digital_marketing",
+    triggers: [
+      "digital marketing","online marketing","digital promotion","marketing services",
+      "internet marketing","online business promotion","mujhe digital marketing chahiye",
+      "digital marketing karwana hai","online marketing chahiye","digital marketing kya hai",
+      "marketing services chahiye","digital marketing services batao","online promotion chahiye",
+      "digital marketing ke liye kya karte ho","digital marketing provide karte ho","marketing karwana hai",
+      "online marketing services","digital marketing karte ho aap","digital marketing ka kaam karte ho",
+      "digital marketing kar sakte ho","online business promotion chahiye","digital marketing services chahiye mujhe",
+      "internet marketing chahiye","digital marketing ke bare me batao","digital promotion chahiye",
+      "digital marketing services chahiye"
+    ],
+    answer: "A2 Technosoft Digital Marketing services mein SEO, Social Media Marketing, ORM aur Performance Optimization provide karti hai."
+  },
+
+  /* ================= 37. SEO ================= */
+  {
+    topic: "seo",
+    triggers: [
+      "seo karte ho","seo service","google ranking","search engine optimization",
+      "website ranking","seo company","seo marketing","mujhe seo chahiye","seo karwana hai",
+      "seo services chahiye","google ranking chahiye","website ranking chahiye","seo kya hai",
+      "seo services batao","google me upar aana hai","seo ke liye kya karte ho","seo provide karte ho",
+      "website google me upar laani hai","seo karte ho aap","seo ka kaam karte ho","seo kar sakte ho",
+      "search engine optimization chahiye","seo services chahiye mujhe","google pe website upar laani hai",
+      "seo ke bare me batao","website ranking karni hai","seo services chahiye mujhe"
+    ],
+    answer: "Ji haan, A2 Technosoft Search Engine Optimization services provide karti hai."
+  },
+
+  /* ================= 38. SOCIAL MEDIA MARKETING ================= */
+  {
+    topic: "social_media_marketing",
+    triggers: [
+      "social media marketing","smm","instagram marketing","facebook marketing",
+      "social media promotion","social media service","mujhe social media marketing chahiye",
+      "social media marketing karwana hai","instagram marketing chahiye","facebook marketing chahiye",
+      "smm services chahiye","social media marketing kya hai","social media services batao",
+      "social media promotion chahiye","social media marketing ke liye kya karte ho",
+      "social media marketing provide karte ho","instagram pe promotion chahiye",
+      "social media marketing karte ho aap","smm ka kaam karte ho","social media marketing kar sakte ho",
+      "facebook pe promotion chahiye","social media marketing services chahiye mujhe",
+      "instagram marketing karwana hai","social media ke bare me batao","social media promotion karwana hai",
+      "smm services chahiye"
+    ],
+    answer: "Ji haan, hum Social Media Marketing services provide karte hain."
+  },
+
+  /* ================= 39. ORM ================= */
+  {
+    topic: "orm",
+    triggers: [
+      "orm","online reputation","reputation management","online reputation management",
+      "brand reputation","negative reviews management","mujhe orm chahiye","orm karwana hai",
+      "online reputation management chahiye","reputation management chahiye","orm kya hai",
+      "orm services batao","brand reputation chahiye","orm ke liye kya karte ho","orm provide karte ho",
+      "negative reviews manage karne hai","orm karte ho aap","orm ka kaam karte ho","orm kar sakte ho",
+      "online reputation chahiye","orm services chahiye mujhe","reputation management karwana hai",
+      "orm ke bare me batao","brand reputation manage karni hai","online reputation management karwana hai",
+      "orm services chahiye"
+    ],
+    answer: "A2 Technosoft Online Reputation Management services provide karti hai."
+  },
+
+  /* ================= 40. PERFORMANCE OPTIMIZATION ================= */
+  {
+    topic: "performance_optimization",
+    triggers: [
+      "website speed","performance optimization","website slow hai","application optimization",
+      "speed optimization","performance improvement","website slow chal rahi hai",
+      "website ki speed badhani hai","performance optimization chahiye","website fast karni hai",
+      "application slow hai","website speed improve karni hai","speed optimization chahiye",
+      "website slow hai kya karu","performance improve karni hai","website ki speed kaise badhaye",
+      "application fast karni hai","performance optimization karwana hai","website speed badhani hai",
+      "speed optimization karwana hai","website slow hai","performance improvement chahiye",
+      "application optimize karni hai","website fast karne hai","speed badhani hai website ki",
+      "performance optimization services chahiye"
+    ],
+    answer: "Ji haan, A2 Technosoft Performance Optimization services provide karti hai."
+  },
+
+  /* ================= 41. PRICING ================= */
+  {
+    topic: "pricing",
+    triggers: [
+      "minimum budget","project minimum price","starting budget","minimum project cost",
+      "lowest price","project kitne se start hota hai","minimum kitna lagega",
+      "project ka minimum kitna hai","starting price kya hai","minimum charge kya hai",
+      "project kitne se shuru hota hai","lowest price kya hai","minimum budget kya hai",
+      "sabse kam kitne me hoga","minimum project kitna hai","project ka starting price kya hai",
+      "sabse sasta kitne me","minimum cost kya hai","project kitne se start hoga",
+      "lowest budget kya hai","minimum kitne ka hota hai","project ka minimum rate kya hai",
+      "sabse kam price kya hai","minimum kitna paisa lagega","project starting kitne se","minimum budget kitna hai"
+    ],
+    answer: "A2 Technosoft ka minimum project budget ₹15,000 se start hota hai."
+  },
+
+  /* ================= 42. ADVANCE PAYMENT ================= */
+  {
+    topic: "advance_payment",
+    triggers: [
+      "advance kitna dena hai","payment kaise karni hai","kitna advance","advance payment",
+      "project start payment","upfront payment","advance kitna hoga","payment kaise hoti hai",
+      "kitna advance dena padega","advance payment kitni hoti hai","project start me kitna dena hai",
+      "payment ka process kya hai","advance kitna lagega","payment kaise karte ho",
+      "kitna pehle dena hoga","advance payment kaise hoti hai","project start karne ke liye kitna dena hai",
+      "payment ka tarika kya hai","advance kitna dena padega","payment kaise karni padegi",
+      "upfront kitna dena hai","advance payment kitna hota hai","payment process kya hai",
+      "kitna advance lagega","payment kaise karna hoga","advance kitna dena hoga"
+    ],
+    answer: "Generally project start karne ke liye 50% advance payment required hoti hai aur remaining 50% delivery ke time hoti hai."
+  },
+
+  /* ================= 43. MILESTONE PAYMENT ================= */
+  {
+    topic: "milestone_payment",
+    triggers: [
+      "milestone payment","installments","payment stages","large project payment",
+      "payment plan","flexible payment","installment me payment ho sakti hai",
+      "payment stages me ho sakti hai","milestone payment ho sakti hai","flexible payment hai",
+      "payment plan kya hai","installments me dena hai","large project ke liye payment",
+      "payment stages kya hai","milestone payment karte ho","installment me payment karni hai",
+      "payment flexible hai kya","large project payment kaise","payment plan batao",
+      "installments me payment","milestone based payment","payment stages me dena hai",
+      "flexible payment options","installment payment hai kya","payment plan kya hai","milestone payment options"
+    ],
+    answer: "Large custom projects ke liye flexible milestone-based payment options available ho sakte hain."
+  },
+
+  /* ================= 44. CUSTOM SOFTWARE PRICING ================= */
+  {
+    topic: "custom_software_pricing",
+    triggers: [
+      "custom software price","software development cost","custom software kitne ka",
+      "crm price","erp price","software budget","custom application cost",
+      "custom software ka kitna lagega","software development ka cost kya hai",
+      "custom software kitne me banega","crm ka price kya hai","erp ka price kya hai",
+      "software ka budget kya hai","custom application ka cost kya hai","software kitne me banega",
+      "custom software ka rate kya hai","software development ka charge kya hai","crm kitne ka hai",
+      "erp kitne ka hai","software ka kitna kharcha hai","custom software ka kitna paisa lagega",
+      "software development ka kitna lagega","custom software ka price batao","software kitne ka banega",
+      "crm ka kitna lagega","erp ka kitna lagega","custom software ka cost kya hai"
+    ],
+    answer: "Custom software ki pricing project scope, features aur requirements par depend karti hai. Exact quotation requirements discuss karne ke baad provide ki ja sakti hai."
+  },
+
+  /* ================= 45. DEVELOPMENT PROCESS ================= */
+  {
+    topic: "development_process",
+    triggers: [
+      "project kaise banate ho","development process","project process","kaise kaam karte ho",
+      "software development process","website development process","project kaise banta hai",
+      "aap kaise kaam karte ho","development ka process kya hai","project banane ka tarika kya hai",
+      "aap kaise project banate ho","process kya hai aapka","project kaise develop karte ho",
+      "kaam kaise karte ho","development process batao","project kaise start karte ho",
+      "aap kaise kaam karte ho batao","project banane ka process kya hai","software kaise banate ho",
+      "website kaise banate ho","project ka process kya hai","aap kaise develop karte ho",
+      "development ka tarika kya hai","project kaise complete karte ho","kaam ka process kya hai",
+      "development process kya hai aapka"
+    ],
+    answer: "Normally process requirement discussion se start hota hai, uske baad planning, design, development, testing aur deployment kiya jata hai."
+  },
+
+  /* ================= 46. REQUIREMENT DISCUSSION ================= */
+  {
+    topic: "requirement_discussion",
+    triggers: [
+      "requirements kaise deni hain","project discuss karna hai","requirement meeting",
+      "project discussion","requirements discuss","consultation","mujhe project discuss karna hai",
+      "requirements discuss karni hai","project ke bare me baat karni hai","requirement meeting chahiye",
+      "project discuss karna hai","apni requirement batani hai","requirements kaise bataye",
+      "project ke liye baat karni hai","requirement discuss karni hai","project discuss karwana hai",
+      "apni requirements discuss karni hai","project ke bare me discuss karna hai","requirement batani hai",
+      "project discuss karna hai aap se","requirements share karni hai","project ki baat karni hai",
+      "requirement discuss karna hai","project ke liye meeting chahiye","apni requirement share karni hai",
+      "project discuss karna hai mujhe"
+    ],
+    answer: "Aap apni requirements team ke saath discuss kar sakte hain, jiske basis par suitable solution aur quotation prepare ki ja sakti hai."
+  },
+
+  /* ================= 47. QUOTATION ================= */
+  {
+    topic: "quotation",
+    triggers: [
+      "quotation chahiye","estimate chahiye","project estimate","price quotation",
+      "quote kaise milega","quotation kaise milega","mujhe quotation chahiye","estimate chahiye mujhe",
+      "project ka quotation chahiye","price quotation chahiye","quote chahiye","quotation kaise milega",
+      "estimate kaise milega","project ka estimate chahiye","quotation chahiye mujhe","price estimate chahiye",
+      "project quotation chahiye","quote kaise milega","quotation milega kya","estimate milega kya",
+      "project ka quote chahiye","quotation chahiye project ka","price quotation milega",
+      "project estimate milega","quotation kaise milegi","estimate chahiye project ka"
+    ],
+    answer: "Ji haan, project requirements discuss karne ke baad team aapke scope ke according quotation provide kar sakti hai."
+  },
+
+  /* ================= 48. CONSULTATION ================= */
+  {
+    topic: "consultation",
+    triggers: [
+      "consultation chahiye","expert se baat karni hai","project discuss karna hai",
+      "developer se baat","team se baat karni hai","consultation call","mujhe consultation chahiye",
+      "expert se baat karni hai","team se baat karni hai","developer se baat karni hai",
+      "consultation call chahiye","project discuss karna hai","consultation karwana hai",
+      "expert se baat karani hai","team se discuss karna hai","consultation le sakta hu",
+      "developer se baat karani hai","consultation chahiye mujhe","expert se consultation chahiye",
+      "team se baat karani hai","project ke liye consultation chahiye","consultation call karani hai",
+      "developer se discuss karna hai","expert se discuss karna hai","consultation book karni hai",
+      "team se consultation chahiye"
+    ],
+    answer: "Bilkul, aapki requirements discuss karne ke liye A2 Technosoft ki team se consultation arrange ki ja sakti hai."
+  },
+
+  /* ================= 49. TIMELINE ================= */
+  {
+    topic: "timeline",
+    triggers: [
+      "project kitne time mein hoga","development time","project duration","kitne weeks lagenge",
+      "software kab ready hoga","delivery time","project kitne time me hoga","project ka time kya hai",
+      "project kab ready hoga","project kitne dino me hoga","project banne me kitna time lagega",
+      "project duration kya hai","project ka kitna time lagega","project kitne week me hoga",
+      "project kitne mahine me hoga","project kab tak hoga","project banne me kitna time lagta hai",
+      "project ka timeline kya hai","project delivery kab hogi","project kitne samay me hoga",
+      "project kitne din me ready hoga","project kitne time me banega","project kab tak ready hoga",
+      "project kitne dino me banega","project ka kitna samay lagega","project kitne time me complete hoga"
+    ],
+    answer: "Timeline project ke scope aur features par depend karti hai. Standard website generally 2–3 weeks aur custom software projects generally 4–8 weeks le sakte hain."
+  },
+
+  /* ================= 50. TECHNOLOGY ================= */
+  {
+    topic: "technology",
+    triggers: [
+      "kaunsi technology use karte ho","tech stack","technology stack","programming languages",
+      "development technology","software kis technology mein","framework kaunsa use karte ho",
+      "aap kaunsi technology use karte ho","aap kis technology me kaam karte ho","tech stack kya hai",
+      "aap kaunsi language use karte ho","aap kis framework me kaam karte ho","technology kya use karte ho",
+      "aap kaunsi technology me banate ho","programming language kaunsi use karte ho",
+      "aap kis technology me develop karte ho","tech stack batao","aap kaunsi technology use karte ho batao",
+      "technology stack kya hai","aap kis language me kaam karte ho","aap kaunsi technology me kaam karte ho",
+      "development technology kya hai","aap kis framework use karte ho","aap kaunsi technology me software banate ho",
+      "tech stack kya hai aapka","aap kis technology me kaam karte ho batao","aap kaunsi technology use karte ho aap"
+    ],
+    answer: "Project requirements ke according A2 Technosoft React, Python, Node.js, WordPress aur Flutter jaise modern technologies ka use karti hai."
+  },
+
+  /* ================= 51. REACT ================= */
+  {
+    topic: "react",
+    triggers: [
+      "react use karte ho","react development","react website","react developer","frontend react",
+      "aap react use karte ho","react me kaam karte ho","react development karte ho","react website banate ho",
+      "react developer hai","react me banate ho","react use karte ho aap","react ka kaam karte ho",
+      "react development karte ho aap","react me website banate ho","react use karte ho kya",
+      "react developer chahiye","react me kaam karte ho aap","react development services",
+      "react website banate ho aap","react use karte ho aap batao","react me develop karte ho",
+      "react developer hai aapke paas","react me website banate ho aap","react use karte ho aap kya"
+    ],
+    answer: "Ji haan, React project requirements ke according use ki jaane wali technologies mein se ek hai."
+  },
+
+  /* ================= 52. PYTHON ================= */
+  {
+    topic: "python",
+    triggers: [
+      "python development","python use karte ho","python software","python developer",
+      "backend python","aap python use karte ho","python me kaam karte ho","python development karte ho",
+      "python software banate ho","python developer hai","python me banate ho","python use karte ho aap",
+      "python ka kaam karte ho","python development karte ho aap","python me software banate ho",
+      "python use karte ho kya","python developer chahiye","python me kaam karte ho aap",
+      "python development services","python software banate ho aap","python use karte ho aap batao",
+      "python me develop karte ho","python developer hai aapke paas","python me software banate ho aap",
+      "python use karte ho aap kya"
+    ],
+    answer: "Ji haan, A2 Technosoft project requirements ke according Python technology ka use karti hai."
+  },
+
+  /* ================= 53. NODE.JS ================= */
+  {
+    topic: "nodejs",
+    triggers: [
+      "node.js","node development","node backend","node developer","javascript backend",
+      "aap node.js use karte ho","node me kaam karte ho","node development karte ho","node backend banate ho",
+      "node developer hai","node me banate ho","node.js use karte ho aap","node ka kaam karte ho",
+      "node development karte ho aap","node me backend banate ho","node use karte ho kya",
+      "node developer chahiye","node me kaam karte ho aap","node development services",
+      "node backend banate ho aap","node.js use karte ho aap batao","node me develop karte ho",
+      "node developer hai aapke paas","node me backend banate ho aap","node.js use karte ho aap kya"
+    ],
+    answer: "Ji haan, Node.js bhi project requirements ke according use ki jaane wali technologies mein hai."
+  },
+
+  /* ================= 54. WORDPRESS ================= */
+  {
+    topic: "wordpress",
+    triggers: [
+      "wordpress website","wordpress development","wordpress developer","wordpress site","cms website",
+      "aap wordpress use karte ho","wordpress me kaam karte ho","wordpress website banate ho",
+      "wordpress development karte ho","wordpress developer hai","wordpress me banate ho",
+      "wordpress use karte ho aap","wordpress ka kaam karte ho","wordpress development karte ho aap",
+      "wordpress me website banate ho","wordpress use karte ho kya","wordpress developer chahiye",
+      "wordpress me kaam karte ho aap","wordpress development services","wordpress website banate ho aap",
+      "wordpress use karte ho aap batao","wordpress me develop karte ho","wordpress developer hai aapke paas",
+      "wordpress me website banate ho aap","wordpress use karte ho aap kya"
+    ],
+    answer: "Ji haan, A2 Technosoft WordPress-based websites bhi develop karti hai."
+  },
+
+  /* ================= 55. FLUTTER ================= */
+  {
+    topic: "flutter",
+    triggers: [
+      "flutter app","flutter development","cross platform app","flutter developer","android ios flutter",
+      "aap flutter use karte ho","flutter me kaam karte ho","flutter app banate ho",
+      "flutter development karte ho","flutter developer hai","flutter me banate ho",
+      "flutter use karte ho aap","flutter ka kaam karte ho","flutter development karte ho aap",
+      "flutter me app banate ho","flutter use karte ho kya","flutter developer chahiye",
+      "flutter me kaam karte ho aap","flutter development services","flutter app banate ho aap",
+      "flutter use karte ho aap batao","flutter me develop karte ho","flutter developer hai aapke paas",
+      "flutter me app banate ho aap","flutter use karte ho aap kya"
+    ],
+    answer: "Ji haan, Flutter bhi project requirements ke according use ki jaane wali technologies mein hai."
+  },
+
+  /* ================= 56. SUPPORT ================= */
+  {
+    topic: "support",
+    triggers: [
+      "support kitne time ka","post delivery support","software support","website support",
+      "free support","maintenance support","support kitna time milta hai",
+      "delivery ke baad support milta hai","software support milta hai","website support milta hai",
+      "free support milta hai","maintenance support milta hai","support kitne mahine ka hai",
+      "post delivery support kya hai","support ka time kya hai","kitne time tak support milta hai",
+      "delivery ke baad support kitna hai","software ka support kitna hai","website ka support kitna hai",
+      "free support kitna hai","maintenance support kitna hai","support kitne din ka hai",
+      "support kitne saal ka hai","post delivery support kitna hai","support ka duration kya hai",
+      "kitne time ka support milta hai"
+    ],
+    answer: "A2 Technosoft 6 months ka free post-delivery support provide karti hai. Uske baad annual maintenance contract options available hain."
+  },
+
+  /* ================= 57. AMC ================= */
+  {
+    topic: "amc",
+    triggers: [
+      "amc kya hai","annual maintenance","maintenance contract","support after 6 months",
+      "yearly support","software maintenance","amc kya hota hai","annual maintenance contract kya hai",
+      "maintenance contract kya hai","6 months ke baad support","yearly support milta hai",
+      "software maintenance kya hai","amc ka matlab kya hai","annual maintenance kya hai",
+      "maintenance contract milta hai","6 months ke baad kya hota hai","yearly support kya hai",
+      "software maintenance milta hai","amc kya hai batao","annual maintenance contract milta hai",
+      "maintenance contract ka kya hai","6 months ke baad support milta hai","yearly support milta hai kya",
+      "software maintenance ka kya hai","amc kya hota hai batao","annual maintenance kya hota hai"
+    ],
+    answer: "6 months ke free support ke baad software ya website maintenance ke liye affordable annual maintenance contract options available hain."
+  },
+
+  /* ================= 58. BUG FIXING ================= */
+  {
+    topic: "bug_fixing",
+    triggers: [
+      "bug fix","software mein problem","website error","application bug","technical issue",
+      "bug fixing service","software me problem hai","website me error hai","application me bug hai",
+      "technical issue hai","bug fix karte ho","software me dikkat hai","website me problem hai",
+      "application me error hai","technical problem hai","bug fixing karte ho","software me issue hai",
+      "website me dikkat hai","application me problem hai","technical issue fix karte ho",
+      "bug fix karte ho aap","software me error hai","website me bug hai","application me dikkat hai",
+      "technical problem fix karte ho","bug fixing service dete ho"
+    ],
+    answer: "Ji haan, software aur digital products ke technical issues aur maintenance requirements ke liye support available hai."
+  },
+
+  /* ================= 59. NDA ================= */
+  {
+    topic: "nda",
+    triggers: [
+      "nda sign karte ho","confidentiality","non disclosure agreement","idea secure rahega",
+      "project confidential hai","data confidentiality","nda sign karoge","confidentiality maintain karte ho",
+      "non disclosure agreement karte ho","idea secure rahega","project confidential rahega",
+      "data confidential rahega","nda karte ho aap","confidentiality kaise maintain karte ho",
+      "idea safe rahega","project secure rahega","data safe rahega","nda sign karoge aap",
+      "confidentiality maintain karoge","non disclosure agreement sign karoge","idea secure rakhoge",
+      "project confidential rakhoge","data confidentiality maintain karoge","nda sign karte ho aap kya",
+      "confidentiality maintain karte ho aap","non disclosure agreement karte ho aap"
+    ],
+    answer: "Ji haan, project start karne se pehle standard NDA aur contract sign kiya ja sakta hai, jisse idea, data aur source code ki confidentiality protect hoti hai."
+  },
+
+  /* ================= 60. SOURCE CODE OWNERSHIP ================= */
+  {
+    topic: "source_code_ownership",
+    triggers: [
+      "source code milega","code ownership","source code ownership","project ka code kiska hoga",
+      "code handover","software ownership","source code milega kya","code ownership kisko milegi",
+      "project ka code kiska hoga","code handover karte ho","software ownership kisko milegi",
+      "source code kisko milega","code milega kya","ownership kisko milegi","project ka code milega",
+      "code handover karte ho aap","software ka ownership kiska hoga","source code handover karte ho",
+      "code ownership kya hai","project ka code kisko milega","software ownership kya hai",
+      "source code milega aap se","code ownership kisko milegi","project ka code handover karte ho",
+      "software ka code milega","source code ownership kya hai"
+    ],
+    answer: "Project completion ke baad client ko source code ki full ownership provide ki jaati hai, as agreed in the project contract."
+  },
+
+  /* ================= 61. DATA SECURITY ================= */
+  {
+    topic: "data_security",
+    triggers: [
+      "data secure hai","security kaise","customer data security","data protection",
+      "information security","project data safe","data secure rahega","security kaise hoti hai",
+      "customer data secure hai","data protection karte ho","information security karte ho",
+      "project data safe rahega","data safe rahega kya","security kaise maintain karte ho",
+      "customer data safe rahega","data protection kaise karte ho","information secure rahega",
+      "project data secure rahega","data security kaise hoti hai","customer data protection karte ho",
+      "data safe rakhoge","security maintain karte ho","customer data secure rakhoge",
+      "data protection kaise hoti hai","information security kaise hoti hai","project data safe rakhoge"
+    ],
+    answer: "Client data aur project information ko confidential rakhne ke liye contractual aur NDA-based confidentiality practices follow ki jaati hain."
+  },
+
+  /* ================= 62. PROJECT MANAGER ================= */
+  {
+    topic: "project_manager",
+    triggers: [
+      "project manager milega","pm milega","project kaun handle karega","dedicated manager",
+      "project coordinator","single point of contact","project manager milega kya","pm milega kya",
+      "project kaun handle karega","dedicated manager milega","project coordinator milega",
+      "single point of contact milega","project manager assign hota hai","pm assign hota hai",
+      "project kaun manage karega","dedicated manager assign hota hai","project coordinator assign hota hai",
+      "single point of contact hota hai","project manager milega aap se","pm milega aap se",
+      "project kaun handle karega aap","dedicated manager milega kya","project coordinator milega kya",
+      "single point of contact milega kya","project manager assign karte ho","pm assign karte ho"
+    ],
+    answer: "Project start hone ke baad dedicated Project Manager assign kiya ja sakta hai jo project communication aur progress ko coordinate karega."
+  },
+
+  /* ================= 63. PROGRESS UPDATES ================= */
+  {
+    topic: "progress_updates",
+    triggers: [
+      "project update milega","progress report","weekly update","development update",
+      "project tracking","status update","project update milega kya","progress report milegi",
+      "weekly update milega","development update milega","project tracking hoti hai","status update milega",
+      "project ka update milega","progress report milti hai","weekly update milta hai",
+      "development update milta hai","project tracking karte ho","status update milta hai",
+      "project update milta hai kya","progress report milegi kya","weekly update milta hai kya",
+      "development update milta hai kya","project tracking hoti hai kya","status update milta hai kya",
+      "project ka update milta hai","progress report milti hai kya"
+    ],
+    answer: "Project ke dauran regular progress updates provide kiye jaate hain, aur dedicated Project Manager communication coordinate karta hai."
+  },
+
+  /* ================= 64. COMMUNICATION ================= */
+  {
+    topic: "communication",
+    triggers: [
+      "team se kaise baat hogi","communication kaise hoga","project communication","slack",
+      "email updates","project contact","team se kaise baat hogi","communication kaise hoga",
+      "project communication kaise hoga","slack pe baat hogi","email updates milenge",
+      "project contact kaise hoga","team se baat kaise karenge","communication kaise karenge",
+      "project communication kya hai","slack pe communication hoti hai","email pe updates milte hai",
+      "project contact kaise karenge","team se kaise communicate karenge","communication kaise maintain karenge",
+      "project communication kaise karte ho","slack pe baat karte ho","email pe updates dete ho",
+      "project contact karte ho","team se kaise baat karte ho","communication kaise karte ho"
+    ],
+    answer: "Project communication requirements ke according email ya Slack jaise channels ke through coordinate ki ja sakti hai."
+  },
+
+  /* ================= 65. PORTFOLIO ================= */
+  {
+    topic: "portfolio",
+    triggers: [
+      "portfolio dikhao","previous projects","old projects","projects dekhu","work samples",
+      "previous work","portfolio website","portfolio dikhao mujhe","previous projects dikhao",
+      "old projects dikhao","projects dekhne hai","work samples dikhao","previous work dikhao",
+      "portfolio website dikhao","aapka portfolio kya hai","purane projects dikhao","projects dekh sakta hu",
+      "work samples hai","previous work hai","portfolio dekhna hai","aapne kya kya banaya hai",
+      "purane projects hai","projects dikhao mujhe","work samples dekhne hai","previous work dekhna hai",
+      "portfolio website hai","aapka portfolio dikhao"
+    ],
+    answer: "A2 Technosoft ka portfolio website par available hai. Portfolio dekhne ke liye company website ke portfolio section ko visit kiya ja sakta hai."
+  },
+
+  /* ================= 66. COMPLETED PROJECTS ================= */
+  {
+    topic: "completed_projects",
+    triggers: [
+      "kitne projects complete kiye","previous projects kitne","total projects","completed projects",
+      "projects experience","kitne projects kiye hai","previous projects kitne hai","total projects kitne hai",
+      "completed projects kitne hai","projects ka experience kya hai","kitne projects complete kiye hai",
+      "aapne kitne projects kiye hai","total kitne projects hai","completed projects kitne hai",
+      "projects experience kya hai","kitne projects kar chuke ho","previous projects kitne hai aapke",
+      "total projects kitne kiye hai","completed projects kitne kiye hai","projects ka experience batao",
+      "kitne projects complete kiye ho","aapne kitne projects complete kiye hai","total kitne projects kiye hai",
+      "completed projects kitne hai aapke","projects experience kya hai aapka"
+    ],
+    answer: "A2 Technosoft ke according 100+ projects complete kiye gaye hain."
+  },
+
+  /* ================= 67. START A PROJECT ================= */
+  {
+    topic: "start_project",
+    triggers: [
+      "project start karna hai","kaam shuru karna hai","project kaise start hoga","i want to start",
+      "mujhe project dena hai","development start","mujhe project start karna hai","kaam shuru karna hai",
+      "project kaise start hoga","mujhe project dena hai","development start karni hai",
+      "project start karwana hai","kaam start karna hai","project shuru karna hai",
+      "mujhe kaam karwana hai","development shuru karni hai","project start karna hai aap se",
+      "kaam shuru karwana hai","project kaise start karu","mujhe development start karni hai",
+      "project start karna hai mujhe","kaam start karna hai mujhe","project shuru karwana hai",
+      "development start karwana hai","mujhe project start karwana hai","kaam shuru karna hai mujhe"
+    ],
+    answer: "Bilkul. Aap apni requirements share kar sakte hain, uske baad team scope aur quotation discuss karke project process start kar sakti hai."
+  },
+
+  /* ================= 68. CONTACT TEAM ================= */
+  {
+    topic: "contact_team",
+    triggers: [
+      "team se baat karni hai","sales team se baat","developer se baat","kisi person se baat karni hai",
+      "representative se baat","human agent","mujhe team se baat karni hai","sales team se baat karni hai",
+      "developer se baat karni hai","kisi person se baat karni hai","representative se baat karni hai",
+      "human agent se baat karni hai","team se baat karani hai","sales team se baat karani hai",
+      "developer se baat karani hai","kisi se baat karni hai","representative se baat karani hai",
+      "human se baat karni hai","mujhe kisi se baat karni hai","team se connect karna hai",
+      "sales team se connect karna hai","developer se connect karna hai","representative se connect karna hai",
+      "human agent se connect karna hai","team se baat karni hai mujhe","sales person se baat karni hai"
+    ],
+    answer: "Bilkul, main aapki requirement note karke A2 Technosoft ki team ke saath connect karne mein help kar sakti hoon."
+  },
+
+  /* ================= 69. CALLBACK ================= */
+  {
+    topic: "callback",
+    triggers: [
+      "mujhe call back chahiye","callback","baad mein call karna","team mujhe call kare",
+      "representative call kare","contact me","mujhe call back chahiye","callback chahiye",
+      "baad me call karna","team mujhe call kare","representative call kare","mujhe contact karo",
+      "call back karwana hai","baad me call karwana hai","team call kare mujhe",
+      "representative call kare mujhe","mujhe contact karna hai","call back chahiye mujhe",
+      "callback karwana hai","baad me call karana hai","team mujhe call kare",
+      "representative mujhe call kare","contact karo mujhe","call back karwao",
+      "baad me call karwao","team se call karwao"
+    ],
+    answer: "Bilkul, main aapki callback requirement note kar sakti hoon taaki team aapse further discussion ke liye contact kar sake."
+  },
+
+  /* ================= 70. DEMO ================= */
+  {
+    topic: "demo",
+    triggers: [
+      "demo milega","software demo","product demo","website demo","application demo","demo chahiye",
+      "demo milega kya","software ka demo milega","product demo milega","website demo milega",
+      "application demo milega","demo chahiye mujhe","demo dikhao","demo karwao","demo de sakte ho",
+      "software demo chahiye","product demo chahiye","website demo chahiye","application demo chahiye",
+      "demo mil sakta hai","demo dikha sakte ho","demo karwa sakte ho","demo de sakte ho kya",
+      "software ka demo chahiye","product ka demo chahiye","website ka demo chahiye"
+    ],
+    answer: "Demo availability specific service ya project par depend karti hai. Aap apni requirement batayein, team aapko available demo options ke baare mein guide kar sakti hai."
+  },
+
+  /* ================= 71. WORKING HOURS ================= */
+  {
+    topic: "working_hours",
+    triggers: [
+      "office timing","working hours","kab available ho","company timing","working time",
+      "office kab khulta hai","office ka time kya hai","aap kab available ho","company ka time kya hai",
+      "working hours kya hai","office kab khulta hai","aap kab tak khule ho","office timing batao",
+      "kab call karu","aap kab milte ho","office ka samay kya hai","working time kya hai",
+      "aap kab tak available ho","office kab band hota hai","company timing batao","aap kab free ho",
+      "office ka timing kya hai","kab baat kar sakta hu","aap kab available ho batao",
+      "working hours batao","office kab khula rehta hai"
+    ],
+    answer: "Is information ki exact timing Knowledge Base mein confirm nahi hai. Company team aapko current working hours confirm kar sakti hai."
+  },
+
+  /* ================= 72. CONTACT NUMBER ================= */
+  {
+    topic: "contact_number",
+    triggers: [
+      "phone number kya hai","contact number","mobile number","call number","company phone",
+      "number share karo","aapka number kya hai","phone number do","contact number do",
+      "mobile number do","call number do","company ka phone number","number share karo",
+      "aapka phone number kya hai","contact number kya hai","mobile number kya hai","call number kya hai",
+      "company phone number kya hai","number batao","aapka contact number kya hai","phone number batao",
+      "contact number batao","mobile number batao","call number batao","company ka number kya hai"
+    ],
+    answer: "Company ka current contact number mujhe available Knowledge Base mein confirm nahi hai. Main aapki request team tak forward karne mein help kar sakti hoon."
+  },
+
+  /* ================= 73. EMAIL ================= */
+  {
+    topic: "email",
+    triggers: [
+      "email id kya hai","company email","email address","mail id","contact email",
+      "aapki email id kya hai","company email kya hai","email address kya hai","mail id kya hai",
+      "contact email kya hai","email id batao","company ka email kya hai","email address batao",
+      "mail id batao","contact email batao","aapka email kya hai","email id do","company email do",
+      "email address do","mail id do","contact email do","aapki email kya hai","email batao",
+      "company ka email id kya hai","email address kya hai aapka"
+    ],
+    answer: "Company ka current email address mujhe available Knowledge Base mein confirm nahi hai. Exact email ke liye company team se confirm karna best rahega."
+  },
+
+  /* ================= 74. WEBSITE (COMPANY) ================= */
+  {
+    topic: "company_website",
+    triggers: [
+      "website kya hai","company website","website address","official website","a2 website",
+      "website link","aapki website kya hai","company website kya hai","website address kya hai",
+      "official website kya hai","a2 website kya hai","website link kya hai","website batao",
+      "company ki website kya hai","website address batao","official website batao","a2 ki website kya hai",
+      "website link batao","aapki website kya hai batao","company website batao","website kya hai aapki",
+      "website link do","official website kya hai aapki","a2 website batao","website address do",
+      "company ki website batao"
+    ],
+    answer: "A2 Technosoft ki official website https://a2technosoft.com hai jahan aap company aur services ke baare mein additional information le sakte hain."
+  },
+
+  /* ================= 75. INDUSTRIES ================= */
+  {
+    topic: "industries",
+    triggers: [
+      "kis industry ke liye kaam karte ho","industries served","business types","kis business ke liye software",
+      "industry experience","different industries","aap kis industry ke liye kaam karte ho",
+      "kaunsi industries serve karte ho","business types kya hai","kis business ke liye software banate ho",
+      "industry experience kya hai","different industries ke liye kaam karte ho",
+      "aap kis business ke liye kaam karte ho","industries kaunsi hai","business types batao",
+      "kis business ke liye kaam karte ho","industry experience batao",
+      "different industries ke liye software banate ho","aap kis industry me kaam karte ho",
+      "industries served batao","business types kya hai aapke","kis business ke liye software banate ho aap",
+      "industry experience kya hai aapka","different industries ke liye kaam karte ho aap",
+      "aap kis industry ke liye software banate ho","industries kaunsi serve karte ho"
+    ],
+    answer: "A2 Technosoft different business requirements ke according customized IT, software aur digital solutions provide karti hai. Specific industry requirement ke liye team se consultation ki ja sakti hai."
+  },
+
+  /* ================= 76. CUSTOM REQUIREMENTS ================= */
+  {
+    topic: "custom_requirements",
+    triggers: [
+      "mera requirement different hai","custom requirement","unique software","special feature",
+      "customized solution","meri requirement ke according","mera requirement alag hai",
+      "mujhe custom requirement chahiye","unique software chahiye","special feature chahiye",
+      "customized solution chahiye","meri requirement ke according banao","mera requirement different hai",
+      "mujhe custom software chahiye","unique solution chahiye","special feature wala software chahiye",
+      "customized solution banao","meri requirement ke according software banao","mera requirement alag hai",
+      "mujhe custom solution chahiye","unique software banao","special feature chahiye mujhe",
+      "customized software chahiye","meri requirement ke according banao","mera requirement different hai",
+      "mujhe custom requirement ke according banao"
+    ],
+    answer: "Ji haan, A2 Technosoft custom requirements ke according software, websites aur digital solutions develop kar sakti hai. Requirement discuss karne ke baad suitable approach suggest ki ja sakti hai."
+  },
+
+  /* ================= 77. EXISTING SOFTWARE ================= */
+  {
+    topic: "existing_software",
+    triggers: [
+      "existing software modify karna hai","old software update","existing application",
+      "software upgrade","existing website changes","current software improve",
+      "purana software update karna hai","existing application modify karni hai","software upgrade karna hai",
+      "existing website me changes karne hai","current software improve karna hai",
+      "purana software modify karna hai","existing software update karna hai","purani application modify karni hai",
+      "software upgrade karwana hai","existing website update karni hai","current software improve karwana hai",
+      "purana software upgrade karna hai","existing application update karni hai","software me changes karne hai",
+      "existing website modify karni hai","current software update karna hai","purani website me changes karne hai",
+      "existing software me changes karne hai","current application improve karni hai"
+    ],
+    answer: "Existing software ya application ki modification aur integration requirements discuss ki ja sakti hain. Final feasibility project ko review karne ke baad confirm hogi."
+  },
+
+  /* ================= 78. THIRD PARTY INTEGRATION ================= */
+  {
+    topic: "third_party_integration",
+    triggers: [
+      "third party api","payment gateway integration","api connect karna","external software integration",
+      "third party software","payment integration","third party api integration chahiye",
+      "payment gateway integration chahiye","api connect karna hai","external software integration chahiye",
+      "third party software integration chahiye","payment integration chahiye",
+      "third party api connect karna hai","payment gateway connect karna hai","api integration karwana hai",
+      "external software connect karna hai","third party software connect karna hai",
+      "payment gateway integrate karna hai","third party api integrate karna hai",
+      "payment integration karwana hai","api connect karwana hai","external software integrate karna hai",
+      "third party software integrate karna hai","payment gateway integration karwana hai",
+      "third party api integration karwana hai","payment integration karwana hai"
+    ],
+    answer: "Ji haan, A2 Technosoft API aur third-party software integration services provide karti hai, subject to the specific project requirements."
+  },
+
+  /* ================= 79. UNKNOWN INFORMATION ================= */
+  {
+    topic: "unknown_information",
+    triggers: [
+      "annual turnover","exact client list","exact employee count","exact working hours",
+      "specific confidential information","unknown company information","company ka annual turnover kitna hai",
+      "exact client list kya hai","employee count kitna hai","exact working hours kya hai",
+      "specific confidential information chahiye","unknown company information chahiye",
+      "annual turnover batao","client list batao","employee count batao","working hours batao",
+      "confidential information chahiye","company information chahiye","turnover kitna hai",
+      "client list kya hai","employee kitne hai","working hours kya hai","confidential information do",
+      "company ki information do","annual turnover kya hai","exact employee count kya hai"
+    ],
+    answer: "माफ़ कीजिए, इस जानकारी की मेरे पास अभी पुष्टि नहीं है। हमारी टीम आपको इसकी exact जानकारी उपलब्ध करवा सकती है।"
+  },
+
+  /* ================= 80. SALES HANDOVER ================= */
+  {
+    topic: "sales_handover",
+    triggers: [
+      "mujhe kisi se baat karni hai","sales person se baat","human se baat","team se connect karo",
+      "representative se connect","project discuss karna hai","quotation chahiye",
+      "mujhe project dena hai","kisi se baat karani hai","sales person se baat karani hai",
+      "human se baat karani hai","team se connect karwao","representative se connect karwao",
+      "project discuss karwana hai","quotation chahiye mujhe","mujhe project dena hai",
+      "kisi se baat karni hai mujhe","sales team se baat karni hai","human agent se baat karni hai",
+      "team se connect karna hai"
+    ],
+    answer: "ज़रूर। मैं आपकी requirement note करके A2 Technosoft की team के साथ आगे की discussion के लिए connect करने में मदद कर सकती हूँ।"
   }
 ];
 
 /* =========================================================
-   A2 TECHNOSOFT KA POORA SUMMARY (Fallback ke liye)
-   ========================================================= */
-const COMPANY_SUMMARY = `Main A2 Technosoft ki AI assistant hoon 👩‍💼.
-
-Aapke sawal ka exact jawab mere paas nahi hai, lekin main aapko A2 Technosoft ke bare me poori jaankari de rahi hoon:
-
-🏢 **Company:** A2 Technosoft ek IT company hai jo AI-powered Web & App solutions provide karti hai.
-
-📍 **Location:** 1/461, Kargil Hero Khuti, Near By Global Hospital Chitrakoot, Vaishali Nagar, Jaipur, Rajasthan 302021
-
-🌐 **Website:** https://a2technosoft.com
-
-🛠️ **Services:** Web Development, Mobile App Development, UI/UX Design, Digital Marketing, Fintech Solutions, WhatsApp Bulk SMS, Bulk Text SMS, SMS OTP, AI/ML/Blockchain/Cloud/IoT
-
-⚙️ **Tech Stack:** React, Node.js, Laravel, Flutter, Python, PHP, Angular, WordPress, Shopify, AWS, MongoDB, MySQL aur bahut kuch
-
-📊 **Stats:** 3+ years experience, 120+ projects, 95% happy clients
-
-📞 **Contact:** Website par 'Get in Touch' form fill karein ya office visit karein.
-
-Aap kisi specific cheez ke bare me puchna chahein to please thoda clear likhiye — jaise "services kya hai", "location batao", "contact number do" etc. 😊`;
-
-/* =========================================================
-   STOP WORDS
+   STOP WORDS + SYNONYMS
    ========================================================= */
 const STOP_WORDS = new Set([
-  "kya", "hai", "ka", "ki", "ke", "ko", "se", "me", "mein", "par",
-  "ho", "hu", "hun", "kar", "karo", "karna", "kro",
-  "aap", "aapka", "aapki", "aapke", "tum", "tumhara", "tumhari",
-  "mera", "meri", "mere", "mujhe", "muje", "mai", "main",
-  "bhai", "sir", "madam", "ji", "yaar",
-  "please", "plz", "pls", "kr", "do", "de", "dena",
-  "is", "this", "the", "a", "an", "of", "for", "to", "and", "or",
-  "bat", "bata", "batao", "bta", "btao", "bolo", "bol",
-  "को", "का", "की", "के", "है", "हो", "में", "मे", "पर", "से",
-  "आप", "आपका", "मुझे", "मैं", "भाई", "जी", "बताओ", "बोलो"
+  "kya","hai","ka","ki","ke","ko","se","me","mein","par","ho","hu","hun",
+  "kar","karo","karna","kro","aap","aapka","aapki","aapke","tum","tumhara",
+  "tumhari","mera","meri","mere","mujhe","muje","mai","main","bhai","sir",
+  "madam","ji","yaar","please","plz","pls","kr","do","de","dena","is","this",
+  "the","a","an","of","for","to","and","or","bat","bata","batao","bta","btao",
+  "bolo","bol","को","का","की","के","है","हो","में","मे","पर","से","आप","आपका",
+  "मुझे","मैं","भाई","जी","बताओ","बोलो"
 ]);
 
-/* =========================================================
-   SYNONYMS
-   ========================================================= */
 const SYNONYMS = {
-  "a2": "a2technosoft", "a2technosoft": "a2technosoft", "a2techno": "a2technosoft",
-  "technosoft": "a2technosoft", "techno": "a2technosoft", "company": "a2technosoft",
-  "business": "a2technosoft", "firm": "a2technosoft", "कंपनी": "a2technosoft",
-
-  "add": "address", "addres": "address", "adress": "address",
-  "location": "location", "loc": "location", "jagah": "location",
-  "sthan": "location", "place": "location", "kahan": "location",
-  "kaha": "location", "kha": "location", "kde": "location",
-  "कहा": "location", "कहाँ": "location", "जगह": "location",
-  "पता": "address", "स्थान": "location",
-  "office": "office", "offc": "office", "ऑफिस": "office", "कार्यालय": "office",
-
-  "contact": "contact", "contect": "contact",
-  "phone": "phone", "fon": "phone", "mob": "mobile", "mobile": "mobile",
-  "number": "number", "num": "number", "no": "number", "call": "call",
-  "sampark": "contact", "संपर्क": "contact", "फोन": "phone",
-  "नंबर": "number", "मोबाइल": "mobile",
-
-  "about": "about", "bare": "about", "baare": "about", "bara": "about",
-  "related": "about", "बारे": "about", "जानकारी": "about",
-
-  "service": "service", "services": "service", "kaam": "service",
-  "work": "service", "काम": "service", "सेवा": "service", "सर्विस": "service",
-
-  "address": "address", "pata": "address",
-  "experience": "experience", "exp": "experience", "saal": "experience",
-  "years": "experience", "अनुभव": "experience",
-
-  "website": "website", "web": "website", "site": "website",
-  "url": "website", "link": "website", "वेबसाइट": "website",
-
-  "email": "email", "mail": "email", "ईमेल": "email",
-  "app": "app", "application": "app", "ऐप": "app",
-  "android": "android", "ios": "ios",
-  "developer": "developer", "dev": "developer", "programmer": "developer", "डेवलपर": "developer",
-  "hire": "hire", "hiring": "hire", "chahiye": "hire", "चाहिए": "hire"
+  "a2":"a2technosoft","a2technosoft":"a2technosoft","a2techno":"a2technosoft",
+  "technosoft":"a2technosoft","techno":"a2technosoft","company":"a2technosoft",
+  "business":"a2technosoft","कंपनी":"a2technosoft",
+  "location":"location","loc":"location","jagah":"location","sthan":"location",
+  "place":"location","kahan":"location","kaha":"location","kha":"location",
+  "kde":"location","कहा":"location","कहाँ":"location","जगह":"location",
+  "पता":"address","स्थान":"location","office":"office","ऑफिस":"office",
+  "contact":"contact","contect":"contact","phone":"phone","mob":"mobile",
+  "mobile":"mobile","number":"number","num":"number","no":"number",
+  "call":"call","sampark":"contact","संपर्क":"contact","फोन":"phone","नंबर":"number",
+  "service":"service","services":"service","kaam":"service","work":"service",
+  "काम":"service","सेवा":"service","सर्विस":"service",
+  "website":"website","web":"website","site":"website","url":"website",
+  "link":"website","वेबसाइट":"website",
+  "app":"app","application":"app","ऐप":"app","android":"android","ios":"ios","iphone":"ios",
+  "experience":"experience","exp":"experience","saal":"experience",
+  "years":"experience","अनुभव":"experience",
+  "price":"price","cost":"price","charge":"price","budget":"price","kitne":"price",
+  "kitna":"price","pricing":"price","daam":"price","rate":"price",
+  "time":"timeline","timeline":"timeline","din":"timeline","weeks":"timeline",
+  "duration":"timeline","kab":"timeline",
+  "hire":"hire","hiring":"hire","chahiye":"chahiye","चाहिए":"chahiye"
 };
 
 /* =========================================================
-   NORMALIZE
+   HELPERS
    ========================================================= */
 function normalize(text) {
   text = text.toLowerCase().trim();
@@ -506,9 +1454,6 @@ function normalize(text) {
   return text;
 }
 
-/* =========================================================
-   TOKENIZE
-   ========================================================= */
 function tokenize(text) {
   const words = normalize(text).split(" ");
   const result = [];
@@ -521,9 +1466,6 @@ function tokenize(text) {
   return result;
 }
 
-/* =========================================================
-   LEVENSHTEIN
-   ========================================================= */
 function levenshtein(a, b) {
   if (a.length === 0) return b.length;
   if (b.length === 0) return a.length;
@@ -546,9 +1488,6 @@ function levenshtein(a, b) {
   return matrix[b.length][a.length];
 }
 
-/* =========================================================
-   FUZZY SCORE
-   ========================================================= */
 function fuzzyScore(word1, word2) {
   if (word1 === word2) return 1;
   if (word1.length < 3 || word2.length < 3) return 0;
@@ -558,53 +1497,95 @@ function fuzzyScore(word1, word2) {
 }
 
 /* =========================================================
-   FIND ANSWER - Smart Fallback ke saath
+   CONTEXT TRACKING
+   ========================================================= */
+let conversationContext = { lastTopic: null, lastService: null, lastIntent: null };
+
+function isFollowUp(text) {
+  const t = normalize(text);
+  return (
+    t.includes("kitne ka") || t.includes("kitne ki") || t.includes("price") ||
+    t.includes("cost") || t.includes("kitna") || t.includes("kitne din") ||
+    t.includes("time") || t.includes("timeline") || t.includes("iska") ||
+    t.includes("uska") || t.includes("ye bhi") || t.includes("aur ye") ||
+    t.length <= 8
+  );
+}
+
+function detectFollowUpIntent(text) {
+  const t = normalize(text);
+  if (t.includes("price") || t.includes("kitne ka") || t.includes("kitne ki") ||
+      t.includes("cost") || t.includes("charge") || t.includes("kitna") ||
+      t.includes("budget") || t.includes("rate") || t.includes("daam")) return "price";
+  if (t.includes("time") || t.includes("din") || t.includes("kitne din") ||
+      t.includes("timeline") || t.includes("kab") || t.includes("duration")) return "timeline";
+  return null;
+}
+
+function getPriceForService(service) {
+  const map = {
+    "website": "Website development packages ₹15,000 se start hote hain. Final cost required features aur project scope par depend karti hai.",
+    "mobile_app": "Mobile app development ₹50,000 se start hoti hai. Final cost app ke features aur requirements ke according decide hoti hai.",
+    "custom_software": "Custom software ki pricing project scope, features aur requirements par depend karti hai. Exact quotation requirements discuss karne ke baad provide ki ja sakti hai.",
+    "seo": "SEO services ki pricing website aur competition ke according decide hoti hai. Exact quotation ke liye team se baat karni best rahegi.",
+    "digital_marketing": "Digital Marketing ki pricing services aur scope ke according decide hoti hai. Exact quotation ke liye team se consult karein."
+  };
+  return map[service] || "Is service ki exact pricing project requirements par depend karti hai. Team aapko exact quotation provide kar sakti hai.";
+}
+
+function getTimelineForService(service) {
+  const map = {
+    "website": "Standard website generally 2 se 3 weeks mein complete ho sakti hai, requirements ke according timeline change ho sakti hai.",
+    "mobile_app": "Mobile app development generally 4 se 8 weeks le sakti hai, depending on features aur project scope.",
+    "custom_software": "Custom software projects generally 4–8 weeks ya usse zyada le sakte hain, project scope ke according."
+  };
+  return map[service] || "Timeline project ke scope aur features par depend karti hai.";
+}
+
+/* =========================================================
+   FIND ANSWER
    ========================================================= */
 function findAnswer(userText) {
   const userTokens = tokenize(userText);
-  if (userTokens.length === 0) {
-    return "Aap kuch likhiye ya boliye, main aapki madad karungi. 🙏";
+  if (userTokens.length === 0) return "Aap kuch likhiye ya boliye, main aapki madad karungi. 🙏";
+
+  if (isFollowUp(userText) && conversationContext.lastService) {
+    const intent = detectFollowUpIntent(userText);
+    if (intent === "price") return getPriceForService(conversationContext.lastService);
+    if (intent === "timeline") return getTimelineForService(conversationContext.lastService);
+    if (conversationContext.lastTopic) {
+      const lastKB = KB.find(k => k.topic === conversationContext.lastTopic);
+      if (lastKB) return lastKB.answer;
+    }
   }
 
   let bestMatch = null;
   let bestScore = 0;
 
-  faqData.forEach(faq => {
+  KB.forEach(item => {
     let score = 0;
-
-    const kwTokens = new Set();
-    faq.keywords.forEach(kw => {
-      tokenize(kw).forEach(t => kwTokens.add(t));
-    });
-
-    const qTokens = new Set(tokenize(faq.question));
+    const triggerTokens = new Set();
+    item.triggers.forEach(trg => tokenize(trg).forEach(t => triggerTokens.add(t)));
+    item.topic.split("_").forEach(w => triggerTokens.add(w));
 
     userTokens.forEach(uTok => {
-      if (kwTokens.has(uTok)) score += 5;
-      if (qTokens.has(uTok)) score += 3;
-
-      kwTokens.forEach(kTok => {
-        const fs = fuzzyScore(uTok, kTok);
-        if (fs >= 0.75) score += 3 * fs;
-      });
-
-      qTokens.forEach(qTok => {
-        const fs = fuzzyScore(uTok, qTok);
-        if (fs >= 0.75) score += 2 * fs;
+      if (triggerTokens.has(uTok)) score += 6;
+      triggerTokens.forEach(tTok => {
+        const fs = fuzzyScore(uTok, tTok);
+        if (fs >= 0.75) score += 4 * fs;
       });
     });
 
-    if (score > bestScore) {
-      bestScore = score;
-      bestMatch = faq;
-    }
+    if (score > bestScore) { bestScore = score; bestMatch = item; }
   });
 
-  // Exact/close match mila
-  if (bestMatch && bestScore >= 2) return bestMatch.answer;
+  if (bestMatch && bestScore >= 3) {
+    conversationContext.lastTopic = bestMatch.topic;
+    conversationContext.lastService = bestMatch.topic;
+    return bestMatch.answer;
+  }
 
-  // Koi match nahi mila — COMPANY SUMMARY de do
-  return COMPANY_SUMMARY;
+  return "माफ़ कीजिए, इस जानकारी की मेरे पास अभी पुष्टि नहीं है। हमारी team आपको इसकी exact जानकारी उपलब्ध करवा सकती है, या आप किसी service ke bare me specific puch sakte ho. 😊";
 }
 
 /* =========================================================
@@ -624,35 +1605,140 @@ function addMessage(text, sender) {
 }
 
 /* =========================================================
-   TEXT TO SPEECH - Female voice
+   TEXT TO SPEECH - Natural Female Voice 🔥
+   ========================================================= */
+let femaleVoice = null;
+
+function loadFemaleVoice() {
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices.length) return;
+
+  // 🔥 Priority list - best female Hindi voices (best se worst tak)
+  const priorityList = [
+    // Android / Chrome (Best quality)
+    { name: "google हिन्दी", lang: "hi" },
+    { name: "google hindi", lang: "hi" },
+    // Windows (Microsoft Swara - best female)
+    { name: "swara", lang: "hi" },
+    { name: "microsoft swara", lang: "hi" },
+    // Mac/iOS
+    { name: "lekha", lang: "hi" },
+    // Edge
+    { name: "neerja", lang: "hi" },
+    { name: "microsoft neerja", lang: "hi" },
+    // Older Microsoft
+    { name: "kalpana", lang: "hi" },
+    { name: "heera", lang: "hi" },
+    // Fallback female
+    { name: "female", lang: "hi" },
+    { name: "zira", lang: "en-IN" },
+    { name: "samantha", lang: "en" }
+  ];
+
+  // Step 1: Priority voice dhoondo
+  for (const item of priorityList) {
+    const v = voices.find(vo =>
+      vo.name.toLowerCase().includes(item.name) &&
+      (vo.lang.toLowerCase().includes(item.lang) || vo.lang.toLowerCase().includes("in"))
+    );
+    if (v) {
+      femaleVoice = v;
+      console.log("✅ Female Voice Selected:", v.name, "|", v.lang);
+      return;
+    }
+  }
+
+  // Step 2: Koi bhi Hindi voice
+  const hindiVoice = voices.find(vo => vo.lang.toLowerCase().includes("hi"));
+  if (hindiVoice) {
+    femaleVoice = hindiVoice;
+    console.log("✅ Hindi Voice:", hindiVoice.name);
+    return;
+  }
+
+  // Step 3: Indian English voice
+  const indianVoice = voices.find(vo => vo.lang.toLowerCase().includes("en-in"));
+  if (indianVoice) {
+    femaleVoice = indianVoice;
+    console.log("✅ Indian Voice:", indianVoice.name);
+    return;
+  }
+
+  // Step 4: Koi bhi female voice
+  const anyFemale = voices.find(vo =>
+    vo.name.toLowerCase().includes("female") ||
+    vo.name.toLowerCase().includes("zira") ||
+    vo.name.toLowerCase().includes("samantha") ||
+    vo.name.toLowerCase().includes("google")
+  );
+  if (anyFemale) {
+    femaleVoice = anyFemale;
+    console.log("⚠️ Female fallback:", anyFemale.name);
+    return;
+  }
+
+  // Step 5: Last fallback
+  if (voices.length) {
+    femaleVoice = voices[0];
+    console.log("⚠️ Last fallback:", femaleVoice.name);
+  }
+}
+
+window.speechSynthesis.onvoiceschanged = loadFemaleVoice;
+loadFemaleVoice();
+setTimeout(loadFemaleVoice, 500);
+setTimeout(loadFemaleVoice, 1500);
+
+/* =========================================================
+   SPEAK - Natural Female Voice
    ========================================================= */
 function speak(text) {
   if (!('speechSynthesis' in window)) return;
+  if (!femaleVoice) loadFemaleVoice();
+
+  // Safari/Chrome bug fix
   window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
+
+  // Emoji + symbols + markdown remove
+  const cleanText = text
+    .replace(/[\u{1F600}-\u{1F6FF}]/gu, "")
+    .replace(/[\u{2600}-\u{26FF}]/gu, "")
+    .replace(/[\u{2700}-\u{27BF}]/gu, "")
+    .replace(/[\u{1F900}-\u{1F9FF}]/gu, "")
+    .replace(/[*_#`~|]/g, "")
+    .replace(/₹/g, " rupees ")
+    .replace(/\n+/g, ". ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (!cleanText) return;
+
+  const utter = new SpeechSynthesisUtterance(cleanText);
+
+  // 🔥 NATURAL FEMALE VOICE SETTINGS
   utter.lang = "hi-IN";
-  utter.rate = 0.95;
-  utter.pitch = 1.15;  // female tone
-  utter.volume = 1;
+  utter.rate = 0.92;      // thodi dheemi = natural
+  utter.pitch = 1.05;     // female tone (natural, robotic nahi)
+  utter.volume = 1.0;
 
-  // Female voice dhoondo (agar available ho)
-  const voices = window.speechSynthesis.getVoices();
-  const femaleVoice = voices.find(v => 
-    v.lang.includes("hi") && v.name.toLowerCase().includes("female")
-  ) || voices.find(v => 
-    v.lang.includes("hi")
-  ) || voices.find(v => 
-    v.lang.includes("en-IN")
-  );
-  if (femaleVoice) utter.voice = femaleVoice;
+  if (femaleVoice) {
+    utter.voice = femaleVoice;
+  }
 
-  window.speechSynthesis.speak(utter);
+  // Chrome bug fix: chhota delay
+  setTimeout(() => {
+    window.speechSynthesis.speak(utter);
+  }, 50);
 }
 
-// Voices load hone ka wait
-window.speechSynthesis.onvoiceschanged = () => {
-  window.speechSynthesis.getVoices();
-};
+window.addEventListener('load', () => {
+  loadFemaleVoice();
+  // Chrome warm-up (pehli baar voice nahi bajti)
+  const warmup = new SpeechSynthesisUtterance(" ");
+  warmup.volume = 0;
+  warmup.lang = "hi-IN";
+  window.speechSynthesis.speak(warmup);
+});
 
 /* =========================================================
    MAIN HANDLER
@@ -660,21 +1746,17 @@ window.speechSynthesis.onvoiceschanged = () => {
 function handleSend() {
   const text = userInput.value.trim();
   if (!text) return;
-
   addMessage(text, "user");
   userInput.value = "";
-
   setTimeout(() => {
     const answer = findAnswer(text);
     addMessage(answer, "bot");
     speak(answer);
-  }, 400);
+  }, 350);
 }
 
 sendBtn.addEventListener("click", handleSend);
-userInput.addEventListener("keypress", e => {
-  if (e.key === "Enter") handleSend();
-});
+userInput.addEventListener("keypress", e => { if (e.key === "Enter") handleSend(); });
 
 /* =========================================================
    SPEECH TO TEXT
@@ -690,10 +1772,7 @@ if (SpeechRecognition) {
   let recording = false;
 
   micBtn.addEventListener("click", () => {
-    if (recording) {
-      recognition.stop();
-      return;
-    }
+    if (recording) { recognition.stop(); return; }
     recognition.start();
   });
 
@@ -715,13 +1794,11 @@ if (SpeechRecognition) {
     handleSend();
   };
 
-  recognition.onerror = (event) => {
-    console.error("Mic error:", event.error);
+  recognition.onerror = () => {
     addMessage("Mic me problem aa gayi. Please dobara try karo.", "bot");
   };
 } else {
   micBtn.style.display = "none";
-  console.warn("Is browser me Speech Recognition support nahi hai.");
 }
 </script>
 </body>
