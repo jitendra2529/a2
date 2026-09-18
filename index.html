@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>A2 Technosoft - AI Assistant</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .chat-container {
+    width: 100%;
+    max-width: 480px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    max-height: 700px;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    padding: 18px;
+    text-align: center;
+  }
+  .header h1 { font-size: 20px; }
+  .header p { font-size: 12px; opacity: 0.9; margin-top: 4px; }
+
+  .chat-box {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    background: #f7f8fc;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .msg {
+    max-width: 82%;
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    white-space: pre-line;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .bot {
+    background: #e9ecff;
+    color: #222;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+
+  .user {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+
+  .input-area {
+    display: flex;
+    padding: 12px;
+    background: #fff;
+    border-top: 1px solid #eee;
+    gap: 8px;
+  }
+
+  .input-area input {
+    flex: 1;
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    outline: none;
+    font-size: 14px;
+    transition: 0.2s;
+  }
+  .input-area input:focus { border-color: #667eea; }
+
+  .btn {
+    border: none;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+  }
+  .btn:hover { transform: scale(1.08); }
+  .btn:active { transform: scale(0.95); }
+
+  .mic-btn.recording {
+    background: #e74c3c;
+    animation: pulse 1s infinite;
+  }
+
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(231,76,60,0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(231,76,60,0); }
+    100% { box-shadow: 0 0 0 0 rgba(231,76,60,0); }
+  }
+
+  .chat-box::-webkit-scrollbar { width: 6px; }
+  .chat-box::-webkit-scrollbar-thumb {
+    background: #c7c7ff;
+    border-radius: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="chat-container">
+  <div class="header">
+    <h1>👩‍💼 A2 Technosoft AI Assistant</h1>
+    <p>Hindi • English • Hinglish - Kuch bhi pucho!</p>
+  </div>
+
+  <div class="chat-box" id="chatBox">
+    <div class="msg bot">Namaste! 🙏 Main A2 Technosoft ki AI assistant hoon. Aap mujhse company, services, contact, location, projects, tech stack — kuch bhi puch sakte ho, main poori koshish karungi aapko sahi jawab dene ki! 😊</div>
+  </div>
+
+  <div class="input-area">
+    <input type="text" id="userInput" placeholder="Yaha likho..." autocomplete="off" />
+    <button class="btn" id="sendBtn" title="Send">➤</button>
+    <button class="btn mic-btn" id="micBtn" title="Bol kar pucho">🎤</button>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   A2 TECHNOSOFT - COMPLETE FAQ DATABASE
+   ========================================================= */
+const faqData = [
+
+  /* ---------- GREETING ---------- */
+  {
+    question: "Namaste hello hi greeting",
+    keywords: ["hello", "hi", "hey", "namaste", "namaskar", "hlo", "hllo", "hlw", "नमस्ते", "हैलो", "हाय", "salam", "assalam", "good morning", "good evening", "good afternoon", "kaise ho", "kaisa hai"],
+    answer: "Namaste! 🙏 Main A2 Technosoft ki AI assistant hoon. Aap company ke bare me kuch bhi puch sakte ho — main poori koshish karungi sahi jawab dene ki! 😊"
+  },
+
+  /* ---------- ABOUT SELF ---------- */
+  {
+    question: "Aap kaun ho tum kaun ho aap kon ho",
+    keywords: ["aap kaun", "tum kaun", "aap kon", "tum kon", "who are you", "aap kya ho", "tum kya ho", "introduce yourself", "apne bare me", "apne baare me", "about yourself", "about you", "tumhara naam", "aapka naam", "your name", "naam kya", "आप कौन", "तुम कौन", "आपका नाम", "तुम्हारा नाम"],
+    answer: "Main A2 Technosoft ki AI assistant hoon 👩‍💼. Mera kaam hai aapko A2 Technosoft ke bare me sahi jaankari dena — services, location, contact, projects, tech stack, hiring, payment solutions — kuch bhi puch sakte ho! 😊"
+  },
+
+  /* ---------- COMPANY BASIC ---------- */
+  {
+    question: "A2 Technosoft kya hai kaun hai about",
+    keywords: ["a2 technosoft", "a2technosoft", "company kya", "kaun hai", "about", "kya hai", "बारे में", "कंपनी", "company", "introduction", "a2 techno soft", "kya karti hai"],
+    answer: "A2 Technosoft ek IT company hai jo AI-powered Web & App solutions provide karti hai. Hum fintech, web development, mobile apps, digital marketing aur bahut kuch banate hain. Humne startups se lekar Fortune 100+ companies ke saath kaam kiya hai. 💼"
+  },
+  {
+    question: "A2 Technosoft ka pata location address kaha hai",
+    keywords: ["location", "address", "office", "kha hai", "kde h", "kaha hai", "kaha ho", "location batao", "address batao", "pata batao", "office kaha", "jaipur office", "jaipur me office", "office address", "office location", "मिलने कहाँ", "meeting kaha", "कार्यालय", "पता", "लोकेशन", "ऑफिस", "jagah", "जगह", "kahan", "कहाँ"],
+    answer: "📍 A2 Technosoft ka office yaha hai:\n1/461, Kargil Hero Khuti, Near By Global Hospital Chitrakoot, Vaishali Nagar, Jaipur, Rajasthan 302021"
+  },
+  {
+    question: "A2 Technosoft ka contact number phone mobile kya hai",
+    keywords: ["contact", "number", "phone", "mobile", "call", "sampark", "फोन", "नंबर", "संपर्क", "contact number", "phone number", "mobile number", "call kare", "baat kare"],
+    answer: "📞 Aap hamari website https://a2technosoft.com par 'Get in Touch' form fill kar sakte ho, ya office visit kar sakte ho. Hamari team aapse jaldi contact karegi."
+  },
+  {
+    question: "A2 Technosoft ki website kya hai",
+    keywords: ["website", "site", "url", "link", "web address", "वेबसाइट", "link batao"],
+    answer: "🌐 Hamari official website hai: https://a2technosoft.com"
+  },
+  {
+    question: "A2 Technosoft ka email kya hai",
+    keywords: ["email", "mail", "gmail", "id", "ईमेल", "email id", "mail id"],
+    answer: "📧 Email ke liye aap website https://a2technosoft.com par contact form fill karein. Hamari team aapko email address provide kar degi."
+  },
+  {
+    question: "A2 Technosoft me kitne saal ka experience hai",
+    keywords: ["experience", "saal", "years", "kitna purana", "अनुभव", "साल", "years in business"],
+    answer: "⏳ A2 Technosoft ke paas 3+ years ka experience hai aur 120+ projects complete kar chuke hain. 95% clients humse khush hain. 😊"
+  },
+  {
+    question: "A2 Technosoft ko kitne clients hain",
+    keywords: ["client", "clients", "customer", "kitne client", "क्लाइंट", "ग्राहक"],
+    answer: "👥 A2 Technosoft ne 120+ projects complete kiye hain aur 95% happy clients hain. Humne 400+ satisfied customers ke saath kaam kiya hai."
+  },
+  {
+    question: "A2 Technosoft kaha kaha kaam karti hai",
+    keywords: ["kaha kaha", "kaun se desh", "countries", "global", "worldwide", "international", "india me"],
+    answer: "🌍 A2 Technosoft India me based hai lekin hum worldwide clients ke saath kaam karte hain — startups se lekar Fortune 100+ companies tak."
+  },
+
+  /* ---------- SERVICES ---------- */
+  {
+    question: "A2 Technosoft kya kya services deti hai",
+    keywords: ["services", "kya kya", "kaam", "सेवाएं", "सर्विस", "kya karti", "service list", "solutions", "what do you do"],
+    answer: "🛠️ A2 Technosoft ki main services:\n1. Web Development\n2. UI/UX Development\n3. Mobile App Development (Android + iOS)\n4. Digital Marketing\n5. Fintech Solutions\n6. WhatsApp Bulk SMS\n7. Bulk Text SMS\n8. SMS OTP Services\n9. Latest Technology (AI, ML, Blockchain, Cloud, IoT)"
+  },
+  {
+    question: "A2 Technosoft web development karti hai",
+    keywords: ["web development", "website banate", "website development", "वेब डेवलपमेंट", "website banwana", "site banwana"],
+    answer: "💻 Haan! A2 Technosoft robust, scalable aur responsive websites banati hai. Hum React, Node.js, Laravel jaise modern technologies use karte hain. SEO-optimized, fast-loading websites jo growth aur conversions badhayein."
+  },
+  {
+    question: "A2 Technosoft mobile app development karti hai",
+    keywords: ["mobile app", "app development", "android", "ios", "ऐप", "मोबाइल ऐप", "app banwana", "application"],
+    answer: "📱 Haan! A2 Technosoft feature-rich Android aur iOS applications banati hai. Seamless performance, robust security aur user-centric design ke saath."
+  },
+  {
+    question: "A2 Technosoft UI UX design karti hai",
+    keywords: ["ui", "ux", "design", "ui ux", "यूआई", "डिजाइन", "interface", "user experience"],
+    answer: "🎨 Haan! Hamare UI/UX experts intuitive aur visually stunning digital experiences banate hain jo customer engagement badhate hain."
+  },
+  {
+    question: "A2 Technosoft digital marketing karti hai",
+    keywords: ["marketing", "digital marketing", "seo", "ppc", "social media", "मार्केटिंग", "प्रचार", "branding", "promotion"],
+    answer: "📈 Haan! A2 Technosoft SEO, PPC, social media marketing, content strategy aur branding services deti hai — aapki online visibility badhane ke liye."
+  },
+  {
+    question: "A2 Technosoft fintech services kya hai",
+    keywords: ["fintech", "finance", "फिनटेक", "financial technology", "fintech services"],
+    answer: "💰 A2 Technosoft fintech services me seamless integration of financial technology tools aata hai — automate, secure aur scale business operations ke liye."
+  },
+  {
+    question: "A2 Technosoft WhatsApp Bulk SMS service deti hai",
+    keywords: ["whatsapp", "bulk sms", "whatsapp sms", "व्हाट्सएप", "whatsapp marketing", "whatsapp message"],
+    answer: "💬 Haan! A2 Technosoft WhatsApp Bulk SMS service deti hai — customers se directly WhatsApp par engage karo marketing aur support ke liye."
+  },
+  {
+    question: "A2 Technosoft Bulk Text SMS service deti hai",
+    keywords: ["bulk sms", "text sms", "sms", "बल्क एसएमएस", "sms gateway", "message bhejna"],
+    answer: "📨 Haan! A2 Technosoft Bulk Text SMS service deti hai — thousands of promotional ya transactional messages instantly bhejo powerful SMS gateway se."
+  },
+  {
+    question: "A2 Technosoft SMS OTP service deti hai",
+    keywords: ["otp", "sms otp", "otp service", "ओटीपी", "verification", "login otp"],
+    answer: "🔐 Haan! A2 Technosoft SMS OTP services deti hai — login, registration aur transaction security ke liye fast aur reliable One-Time Password delivery."
+  },
+  {
+    question: "A2 Technosoft latest technology services deti hai",
+    keywords: ["latest technology", "ai", "ml", "blockchain", "cloud", "iot", "एआई", "नई तकनीक", "machine learning"],
+    answer: "🚀 Haan! A2 Technosoft AI, Machine Learning, Blockchain, Cloud Computing aur IoT jaise cutting-edge technologies par kaam karti hai."
+  },
+
+  /* ---------- TECH STACK ---------- */
+  {
+    question: "A2 Technosoft kaunsi technologies use karti hai tech stack",
+    keywords: ["technology", "tech stack", "technologies", "टेक्नोलॉजी", "tools", "languages", "kaunsi tech"],
+    answer: "⚙️ A2 Technosoft ka tech stack:\nAndroid, HTML, Angular, AWS, Big Data, Bootstrap, CakePHP, Cloud, CodeIgniter, CSS3, Flutter, Golang, Microsoft SQL, MongoDB, MySQL, iOS, JavaScript, Kotlin, Laravel, Node, NPM, PHP, PostgreSQL, Python, React, Shopify, Unity-3D, Vue, WooCommerce, WordPress."
+  },
+  { question: "A2 Technosoft React use karti hai", keywords: ["react", "reactjs", "रिएक्ट"], answer: "✅ Haan! A2 Technosoft React use karti hai modern web applications banane ke liye." },
+  { question: "A2 Technosoft Flutter use karti hai", keywords: ["flutter", "फ्लटर"], answer: "✅ Haan! A2 Technosoft Flutter use karti hai cross-platform mobile apps banane ke liye." },
+  { question: "A2 Technosoft Python use karti hai", keywords: ["python", "पाइथन"], answer: "✅ Haan! A2 Technosoft Python use karti hai backend, AI aur data solutions ke liye." },
+  { question: "A2 Technosoft WordPress Shopify use karti hai", keywords: ["wordpress", "वर्डप्रेस", "woocommerce", "shopify"], answer: "✅ Haan! A2 Technosoft WordPress, WooCommerce aur Shopify par bhi kaam karti hai." },
+
+  /* ---------- PROCESS ---------- */
+  {
+    question: "A2 Technosoft ka development process kya hai",
+    keywords: ["process", "development process", "kaise kaam", "प्रक्रिया", "steps", "how you work"],
+    answer: "🔄 A2 Technosoft ka development process:\n1. Discussion\n2. Design\n3. Development\n4. Testing\n5. Delivery"
+  },
+  {
+    question: "A2 Technosoft me developer hire kaise kare",
+    keywords: ["hire developer", "developer hire", "hire", "डेवलपर", "full time", "part time", "hourly", "developer chahiye"],
+    answer: "👨‍💻 A2 Technosoft se developer hire karne ka process:\n1. POST Requirements\n2. SCREEN Resumes\n3. INTERVIEW & Select\n4. CHOOSE Hiring Model\n5. PAY & Get Started\n\nAap full time, part time ya hourly developer hire kar sakte ho."
+  },
+
+  /* ---------- INDUSTRIES ---------- */
+  {
+    question: "A2 Technosoft kaunsi industries ke liye kaam karti hai",
+    keywords: ["industries", "industry", "kaun se sector", "इंडस्ट्री", "sectors", "kis field"],
+    answer: "🏭 A2 Technosoft in industries ke liye kaam karti hai:\n1. Sports\n2. Food & Beverage\n3. Travel & Tourism\n4. E-commerce & B2B\n5. Gaming\n6. On-demand Services\n7. Real Estate\n8. Education"
+  },
+  {
+    question: "A2 Technosoft education sector me kya karti hai",
+    keywords: ["education", "school", "college", "शिक्षा", "e-learning", "online classroom", "mcq", "e-library", "learning app"],
+    answer: "🎓 A2 Technosoft education sector me:\n1. Online Classrooms\n2. ML-based MCQs Platforms\n3. E-Library App Development\n4. Digital Learning App Development\n5. Online Learning App Development"
+  },
+  {
+    question: "A2 Technosoft ecommerce ke liye kya karti hai",
+    keywords: ["ecommerce", "e-commerce", "online store", "b2b", "ई-कॉमर्स", "online shop", "dukan"],
+    answer: "🛒 A2 Technosoft secure aur scalable e-commerce solutions banati hai B2C aur B2B businesses ke liye — product catalogs, payment gateways, inventory aur user management ke saath."
+  },
+  {
+    question: "A2 Technosoft real estate ke liye kya karti hai",
+    keywords: ["real estate", "property", "realtor", "रियल एस्टेट", "property website", "ghar", "makan"],
+    answer: "🏠 A2 Technosoft real estate ke liye advanced search filters, property listings, maps, agent portals aur CRM integration wali websites banati hai."
+  },
+  {
+    question: "A2 Technosoft gaming ke liye kya karti hai",
+    keywords: ["gaming", "game", "गेमिंग", "गेम", "gaming website"],
+    answer: "🎮 A2 Technosoft gaming communities, review sites, browser-based games aur game launch platforms banati hai — performance, interactivity aur monetization ke liye optimized."
+  },
+  {
+    question: "A2 Technosoft travel tourism ke liye kya karti hai",
+    keywords: ["travel", "tourism", "tour", "ट्रैवल", "यात्रा", "travel website", "booking"],
+    answer: "✈️ A2 Technosoft travel agencies, tour operators aur destination marketers ke liye booking engines, itinerary planners, maps aur reviews wali websites banati hai."
+  },
+  {
+    question: "A2 Technosoft food restaurant ke liye kya karti hai",
+    keywords: ["food", "restaurant", "cafe", "खाना", "रेस्टोरेंट", "food delivery", "menu"],
+    answer: "🍔 A2 Technosoft restaurants, cafes, food delivery startups aur beverage brands ke liye interactive, mobile-friendly websites banati hai — online ordering, menu management aur loyalty programs ke saath."
+  },
+  {
+    question: "A2 Technosoft sports ke liye kya karti hai",
+    keywords: ["sports", "sport", "खेल", "sports website", "tournament", "league"],
+    answer: "⚽ A2 Technosoft sports platforms banati hai real-time scores, player stats, booking systems aur fan engagement features ke saath."
+  },
+  {
+    question: "A2 Technosoft on demand services ke liye kya karti hai",
+    keywords: ["on demand", "on-demand", "delivery", "ride", "home service", "ऑन डिमांड"],
+    answer: "🚕 A2 Technosoft on-demand platforms banati hai delivery, ride-sharing, home services, healthcare ke liye — real-time tracking, booking systems aur integrated payments ke saath."
+  },
+
+  /* ---------- SERVER / HOSTING ---------- */
+  {
+    question: "A2 Technosoft server ya hosting support deti hai",
+    keywords: ["server", "hosting", "सर्वर", "होस्टिंग", "aws server", "cloud server", "dedicated server"],
+    answer: "🖥️ Haan! A2 Technosoft server/hosting support deti hai:\n1. AWS Server\n2. Sharing Server\n3. Dedicated Server\n4. Cloud Server\n5. Hybrid Server"
+  },
+
+  /* ---------- PAYMENT ---------- */
+  {
+    question: "A2 Technosoft payment solutions deti hai",
+    keywords: ["payment", "payment gateway", "stripe", "paypal", "razorpay", "पेमेंट", "upi", "transaction"],
+    answer: "💳 Haan! A2 Technosoft seamless payment integration deti hai:\n1. Stripe, PayPal, Razorpay integration\n2. Secure PCI-compliant transaction processing\n3. Multiple payment methods (Credit cards, Digital wallets, UPI, Bank transfers)\n4. 24/7 Payment Support"
+  },
+  {
+    question: "A2 Technosoft payment integration kaise karti hai",
+    keywords: ["payment integration", "gateway integration", "payment gateway integrate"],
+    answer: "🔗 A2 Technosoft popular payment gateways jaise Stripe, PayPal aur Razorpay ko aapki website ya app me minimal setup time ke saath integrate karti hai."
+  },
+
+  /* ---------- CLIENTS / REVIEWS ---------- */
+  {
+    question: "A2 Technosoft ke clients kya kehte hain reviews",
+    keywords: ["reviews", "feedback", "testimonial", "clients kya kehte", "रिव्यू", "अनुभव", "client review"],
+    answer: "⭐ A2 Technosoft ke clients:\n\n• Rajesh Kumar (Retail Business Owner, Mumbai): 'A2 TechnoSoft helped us launch our online store smoothly and efficiently. Highly recommended!'\n\n• Neha Sharma (Startup Founder, Bengaluru): 'Great experience working with A2 TechnoSoft. Delivered a mobile app that exceeded our expectations.'\n\n• Priya Singh (Operations Manager, Delhi): 'Very helpful and provided excellent support during our custom CRM solution development.'"
+  },
+  {
+    question: "A2 Technosoft ke kitne projects complete hue hain",
+    keywords: ["projects", "kitne project", "प्रोजेक्ट", "completed projects"],
+    answer: "📊 A2 Technosoft ne 120+ projects complete kiye hain aur 3+ years se business me hain."
+  },
+  {
+    question: "A2 Technosoft ke kitne happy clients hain",
+    keywords: ["happy clients", "khush clients", "satisfied", "95%", "client satisfaction"],
+    answer: "😊 A2 Technosoft ke 95% happy clients hain — 400+ satisfied customers ke saath."
+  },
+
+  /* ---------- BLOG ---------- */
+  {
+    question: "A2 Technosoft ka blog kya hai",
+    keywords: ["blog", "blogs", "articles", "ब्लॉग", "latest blog", "tech blog"],
+    answer: "📝 A2 Technosoft ke latest tech blogs:\n1. Android App Development\n2. Web Development - Information from Trusted Internet Sources\n3. Mobile App Development & Web App Development\n\nAap website https://a2technosoft.com par ye blogs padh sakte ho."
+  },
+
+  /* ---------- HIRING / CONTACT FORM ---------- */
+  {
+    question: "A2 Technosoft se contact kaise kare",
+    keywords: ["contact kaise", "sampark kaise", "baat kaise", "get in touch", "form fill", "consultation", "milna hai"],
+    answer: "📞 A2 Technosoft se contact karne ke liye:\n1. Website https://a2technosoft.com par 'Get in Touch' form fill karein\n2. Office visit karein: 1/461, Kargil Hero Khuti, Vaishali Nagar, Jaipur\n3. Hamari team aapse jaldi contact karegi.\n\n🔒 100% Confidential - Hum NDA sign karte hain."
+  },
+  {
+    question: "A2 Technosoft NDA sign karti hai confidential",
+    keywords: ["nda", "confidential", "privacy", "गोपनीयता", "nda sign", "secret"],
+    answer: "🔒 Haan! A2 Technosoft 100% confidentiality maintain karti hai aur NDA (Non-Disclosure Agreement) sign karti hai."
+  },
+
+  /* ---------- LEGAL ---------- */
+  {
+    question: "A2 Technosoft legal disclaimer kya hai",
+    keywords: ["legal", "disclaimer", "law", "कानून", "legal disclaimer", "govt of india"],
+    answer: "⚖️ A2 Technosoft Govt. of India ke laws (including Promotion and Regulation of Online Gaming Act, 2025) ko abide karti hai. Full Legal Disclaimer website par available hai."
+  },
+
+  /* ---------- WHY CHOOSE US ---------- */
+  {
+    question: "A2 Technosoft kyu choose kare",
+    keywords: ["why choose", "kyu choose", "best kyu", "क्यों चुने", "why a2", "benefits", "fayde"],
+    answer: "✅ A2 Technosoft kyu choose karein:\n1. 3+ years experience\n2. 120+ projects completed\n3. 95% happy clients\n4. Startup se Fortune 100+ tak clients\n5. Modern technologies (React, Node.js, Laravel, AI, ML)\n6. 100% Confidential - NDA sign karte hain\n7. End-to-end digital transformation services"
+  },
+  {
+    question: "A2 Technosoft kis type ki company hai",
+    keywords: ["type of company", "kaisi company", "it company", "कैसी कंपनी", "software company", "it services"],
+    answer: "🏢 A2 Technosoft ek IT company hai jo AI-Powered Web & App Solutions provide karti hai. Hum fintech, web development, mobile apps, digital marketing, e-commerce aur bahut kuch banate hain."
+  },
+  {
+    question: "A2 Technosoft ka mission kya hai",
+    keywords: ["mission", "vision", "goal", "मिशन", "लक्ष्य", "aim", "uddeshya"],
+    answer: "🎯 A2 Technosoft ka mission hai businesses ko AI-powered web aur app solutions ke through empower karna, unki growth accelerate karna aur digital transformation me madad karna."
+  }
+];
+
+/* =========================================================
+   A2 TECHNOSOFT KA POORA SUMMARY (Fallback ke liye)
+   ========================================================= */
+const COMPANY_SUMMARY = `Main A2 Technosoft ki AI assistant hoon 👩‍💼.
+
+Aapke sawal ka exact jawab mere paas nahi hai, lekin main aapko A2 Technosoft ke bare me poori jaankari de rahi hoon:
+
+🏢 **Company:** A2 Technosoft ek IT company hai jo AI-powered Web & App solutions provide karti hai.
+
+📍 **Location:** 1/461, Kargil Hero Khuti, Near By Global Hospital Chitrakoot, Vaishali Nagar, Jaipur, Rajasthan 302021
+
+🌐 **Website:** https://a2technosoft.com
+
+🛠️ **Services:** Web Development, Mobile App Development, UI/UX Design, Digital Marketing, Fintech Solutions, WhatsApp Bulk SMS, Bulk Text SMS, SMS OTP, AI/ML/Blockchain/Cloud/IoT
+
+⚙️ **Tech Stack:** React, Node.js, Laravel, Flutter, Python, PHP, Angular, WordPress, Shopify, AWS, MongoDB, MySQL aur bahut kuch
+
+📊 **Stats:** 3+ years experience, 120+ projects, 95% happy clients
+
+📞 **Contact:** Website par 'Get in Touch' form fill karein ya office visit karein.
+
+Aap kisi specific cheez ke bare me puchna chahein to please thoda clear likhiye — jaise "services kya hai", "location batao", "contact number do" etc. 😊`;
+
+/* =========================================================
+   STOP WORDS
+   ========================================================= */
+const STOP_WORDS = new Set([
+  "kya", "hai", "ka", "ki", "ke", "ko", "se", "me", "mein", "par",
+  "ho", "hu", "hun", "kar", "karo", "karna", "kro",
+  "aap", "aapka", "aapki", "aapke", "tum", "tumhara", "tumhari",
+  "mera", "meri", "mere", "mujhe", "muje", "mai", "main",
+  "bhai", "sir", "madam", "ji", "yaar",
+  "please", "plz", "pls", "kr", "do", "de", "dena",
+  "is", "this", "the", "a", "an", "of", "for", "to", "and", "or",
+  "bat", "bata", "batao", "bta", "btao", "bolo", "bol",
+  "को", "का", "की", "के", "है", "हो", "में", "मे", "पर", "से",
+  "आप", "आपका", "मुझे", "मैं", "भाई", "जी", "बताओ", "बोलो"
+]);
+
+/* =========================================================
+   SYNONYMS
+   ========================================================= */
+const SYNONYMS = {
+  "a2": "a2technosoft", "a2technosoft": "a2technosoft", "a2techno": "a2technosoft",
+  "technosoft": "a2technosoft", "techno": "a2technosoft", "company": "a2technosoft",
+  "business": "a2technosoft", "firm": "a2technosoft", "कंपनी": "a2technosoft",
+
+  "add": "address", "addres": "address", "adress": "address",
+  "location": "location", "loc": "location", "jagah": "location",
+  "sthan": "location", "place": "location", "kahan": "location",
+  "kaha": "location", "kha": "location", "kde": "location",
+  "कहा": "location", "कहाँ": "location", "जगह": "location",
+  "पता": "address", "स्थान": "location",
+  "office": "office", "offc": "office", "ऑफिस": "office", "कार्यालय": "office",
+
+  "contact": "contact", "contect": "contact",
+  "phone": "phone", "fon": "phone", "mob": "mobile", "mobile": "mobile",
+  "number": "number", "num": "number", "no": "number", "call": "call",
+  "sampark": "contact", "संपर्क": "contact", "फोन": "phone",
+  "नंबर": "number", "मोबाइल": "mobile",
+
+  "about": "about", "bare": "about", "baare": "about", "bara": "about",
+  "related": "about", "बारे": "about", "जानकारी": "about",
+
+  "service": "service", "services": "service", "kaam": "service",
+  "work": "service", "काम": "service", "सेवा": "service", "सर्विस": "service",
+
+  "address": "address", "pata": "address",
+  "experience": "experience", "exp": "experience", "saal": "experience",
+  "years": "experience", "अनुभव": "experience",
+
+  "website": "website", "web": "website", "site": "website",
+  "url": "website", "link": "website", "वेबसाइट": "website",
+
+  "email": "email", "mail": "email", "ईमेल": "email",
+  "app": "app", "application": "app", "ऐप": "app",
+  "android": "android", "ios": "ios",
+  "developer": "developer", "dev": "developer", "programmer": "developer", "डेवलपर": "developer",
+  "hire": "hire", "hiring": "hire", "chahiye": "hire", "चाहिए": "hire"
+};
+
+/* =========================================================
+   NORMALIZE
+   ========================================================= */
+function normalize(text) {
+  text = text.toLowerCase().trim();
+  text = text.replace(/[?!.,।;:'"()\[\]{}]/g, " ");
+  text = text.replace(/\s+/g, " ");
+  return text;
+}
+
+/* =========================================================
+   TOKENIZE
+   ========================================================= */
+function tokenize(text) {
+  const words = normalize(text).split(" ");
+  const result = [];
+  words.forEach(w => {
+    if (!w) return;
+    if (STOP_WORDS.has(w)) return;
+    const syn = SYNONYMS[w] || w;
+    if (!result.includes(syn)) result.push(syn);
+  });
+  return result;
+}
+
+/* =========================================================
+   LEVENSHTEIN
+   ========================================================= */
+function levenshtein(a, b) {
+  if (a.length === 0) return b.length;
+  if (b.length === 0) return a.length;
+  const matrix = [];
+  for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+  for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1,
+          matrix[i][j - 1] + 1,
+          matrix[i - 1][j] + 1
+        );
+      }
+    }
+  }
+  return matrix[b.length][a.length];
+}
+
+/* =========================================================
+   FUZZY SCORE
+   ========================================================= */
+function fuzzyScore(word1, word2) {
+  if (word1 === word2) return 1;
+  if (word1.length < 3 || word2.length < 3) return 0;
+  const dist = levenshtein(word1, word2);
+  const maxLen = Math.max(word1.length, word2.length);
+  return 1 - dist / maxLen;
+}
+
+/* =========================================================
+   FIND ANSWER - Smart Fallback ke saath
+   ========================================================= */
+function findAnswer(userText) {
+  const userTokens = tokenize(userText);
+  if (userTokens.length === 0) {
+    return "Aap kuch likhiye ya boliye, main aapki madad karungi. 🙏";
+  }
+
+  let bestMatch = null;
+  let bestScore = 0;
+
+  faqData.forEach(faq => {
+    let score = 0;
+
+    const kwTokens = new Set();
+    faq.keywords.forEach(kw => {
+      tokenize(kw).forEach(t => kwTokens.add(t));
+    });
+
+    const qTokens = new Set(tokenize(faq.question));
+
+    userTokens.forEach(uTok => {
+      if (kwTokens.has(uTok)) score += 5;
+      if (qTokens.has(uTok)) score += 3;
+
+      kwTokens.forEach(kTok => {
+        const fs = fuzzyScore(uTok, kTok);
+        if (fs >= 0.75) score += 3 * fs;
+      });
+
+      qTokens.forEach(qTok => {
+        const fs = fuzzyScore(uTok, qTok);
+        if (fs >= 0.75) score += 2 * fs;
+      });
+    });
+
+    if (score > bestScore) {
+      bestScore = score;
+      bestMatch = faq;
+    }
+  });
+
+  // Exact/close match mila
+  if (bestMatch && bestScore >= 2) return bestMatch.answer;
+
+  // Koi match nahi mila — COMPANY SUMMARY de do
+  return COMPANY_SUMMARY;
+}
+
+/* =========================================================
+   CHAT UI
+   ========================================================= */
+const chatBox = document.getElementById("chatBox");
+const userInput = document.getElementById("userInput");
+const sendBtn = document.getElementById("sendBtn");
+const micBtn = document.getElementById("micBtn");
+
+function addMessage(text, sender) {
+  const div = document.createElement("div");
+  div.className = "msg " + sender;
+  div.textContent = text;
+  chatBox.appendChild(div);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+/* =========================================================
+   TEXT TO SPEECH - Female voice
+   ========================================================= */
+function speak(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = "hi-IN";
+  utter.rate = 0.95;
+  utter.pitch = 1.15;  // female tone
+  utter.volume = 1;
+
+  // Female voice dhoondo (agar available ho)
+  const voices = window.speechSynthesis.getVoices();
+  const femaleVoice = voices.find(v => 
+    v.lang.includes("hi") && v.name.toLowerCase().includes("female")
+  ) || voices.find(v => 
+    v.lang.includes("hi")
+  ) || voices.find(v => 
+    v.lang.includes("en-IN")
+  );
+  if (femaleVoice) utter.voice = femaleVoice;
+
+  window.speechSynthesis.speak(utter);
+}
+
+// Voices load hone ka wait
+window.speechSynthesis.onvoiceschanged = () => {
+  window.speechSynthesis.getVoices();
+};
+
+/* =========================================================
+   MAIN HANDLER
+   ========================================================= */
+function handleSend() {
+  const text = userInput.value.trim();
+  if (!text) return;
+
+  addMessage(text, "user");
+  userInput.value = "";
+
+  setTimeout(() => {
+    const answer = findAnswer(text);
+    addMessage(answer, "bot");
+    speak(answer);
+  }, 400);
+}
+
+sendBtn.addEventListener("click", handleSend);
+userInput.addEventListener("keypress", e => {
+  if (e.key === "Enter") handleSend();
+});
+
+/* =========================================================
+   SPEECH TO TEXT
+   ========================================================= */
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+  const recognition = new SpeechRecognition();
+  recognition.lang = "hi-IN";
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  let recording = false;
+
+  micBtn.addEventListener("click", () => {
+    if (recording) {
+      recognition.stop();
+      return;
+    }
+    recognition.start();
+  });
+
+  recognition.onstart = () => {
+    recording = true;
+    micBtn.classList.add("recording");
+    micBtn.textContent = "⏹";
+  };
+
+  recognition.onend = () => {
+    recording = false;
+    micBtn.classList.remove("recording");
+    micBtn.textContent = "🎤";
+  };
+
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    userInput.value = transcript;
+    handleSend();
+  };
+
+  recognition.onerror = (event) => {
+    console.error("Mic error:", event.error);
+    addMessage("Mic me problem aa gayi. Please dobara try karo.", "bot");
+  };
+} else {
+  micBtn.style.display = "none";
+  console.warn("Is browser me Speech Recognition support nahi hai.");
+}
+</script>
+</body>
+</html>
